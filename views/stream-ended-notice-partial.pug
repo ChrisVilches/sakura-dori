@@ -1,0 +1,9 @@
+if query.chatId && helpers.isOlderThanDays(latestChatMessage.createdAt, 7)
+  .alert.alert-expired
+    |最後のメッセージは#{helpers.formatDateAgo(latestChatMessage.createdAt)}でした。原因は以下のいずれかです。
+    ul
+      li 管理者がメッセージの取得を停止した。
+      li 配信が終了した。
+    a(href=helpers.youtubeLink(query.chatId) target='_blank')
+      = chats.find(c => c.chatId == query.chatId).title
+    |で配信の状況を確認できます。

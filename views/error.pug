@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1
+    = error.status
+    | エラー
+  p= error.message
+
+  if showTrace
+    pre.error-stack #{error.stack}

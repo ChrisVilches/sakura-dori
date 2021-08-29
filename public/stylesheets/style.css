@@ -1,0 +1,110 @@
+body {
+  padding: 10px 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+a:hover{
+  color: #00B7FF;
+}
+
+.alert-expired{
+  background-color: #dedede;
+}
+
+.message-container{
+  margin-bottom: 10px;
+}
+
+.message-deleted{
+  color: #888;
+}
+
+.footer-link-container {
+  margin: 20px 0;
+}
+
+.footer-link {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.active-page {
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.input-field {
+  margin-bottom: 20px;
+}
+
+.input-field input, .input-field select{
+  width: 100%;
+}
+
+.input-field-daterange {
+  margin-bottom: 20px;
+}
+
+.pagination-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid black;
+  vertical-align: middle;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.messages-text {
+  word-break: break-word;
+}
+
+.footer {
+  text-align: center;
+}
+
+.error-stack {
+  background-color: #efefef;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.system-diagram {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+}
+
+.recent-users-list {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.recent-users-user {
+  display: inline-block;
+  padding-right: 15px;
+}
+
+.recent-users-user img {
+  padding-right: 5px;
+}

@@ -1,0 +1,61 @@
+extends layout
+
+block content
+  form(action="/" method="GET")
+    .row
+      .col-md-12.col-lg-6.input-field-daterange
+        input(type='date', name='dateFrom', value=query.dateFrom)
+        span ～
+        input(type='date', name='dateTo', value=query.dateTo)
+      .clearfix
+      .col-md-6.input-field
+        select(name='chatId')
+          option(value = '')
+            | すべての配信
+          each chat in chats
+            option(value = chat.chatId, selected=chat.chatId == query.chatId)= chat.title
+
+      .clearfix
+      .col-md-6.input-field
+        input(name='author', placeholder='ユーザー名で絞り込み', value=query.author)
+
+      .col-md-6.input-field
+        input(name='text', placeholder='メッセージの内容で絞り込み', value=query.text)
+
+      .input-field
+        button(type='submit')
+          | 検索
+
+  if recentUsers.length > 0
+    .mb-4
+      include connected-users-partial
+
+  hr
+
+  include stream-ended-notice-partial
+
+  if pages > 0
+    .row
+      include pagination-partial
+
+    each msg in messages
+      .row.message-container.mb-4(class=(msg.deleted ? 'message-deleted' : '')
+        data-timestamp=helpers.formatDateDetail(msg.timestamp) data-created-at=helpers.formatDateDetail(msg.createdAt))
+        .col-md-12
+          small.float-end
+            div(title=msg.ytId)
+              = helpers.formatDate(msg.createdAt)
+            a(href=helpers.youtubeLink(msg.chatId), title=chats.find(c => c.chatId == msg.chatId).title)
+              = msg.chatId
+          .mb-2
+              .d-inline
+                img.mr-4(src=msg.icon)
+              = msg.author
+          .clearfix
+          .messages-text= msg.text
+          if msg.deleted
+            small.float-end| 撤回済み
+    .row
+      include pagination-partial
+  else
+    .alert.alert-warning| 結果がありませんでした。

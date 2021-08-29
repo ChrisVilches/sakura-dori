@@ -1,0 +1,49 @@
+extends layout
+
+block variables
+  - subtitle = 'システムの状態'
+
+block content
+  h3 最新のメッセージ
+  p
+    = helpers.formatDate(latestMessage.createdAt)
+    |（#{helpers.formatDateAgo(latestMessage.createdAt)}）
+
+  h3 メッセージ総数
+  p= totalCount
+
+  h3 オンラインユーザーの取得方法
+  p
+    |#{helpers.secToMin(activeUsers.withinSeconds)}分前オンラインだったユーザーを含む
+    |(#{activeUsers.intervalSeconds}秒おきに更新)。
+    |現在#{activeUsers.userCount}人がオンラインです。
+
+  h3 環境
+  p= environment
+  if herokuDeployData
+    p
+      = helpers.formatDate(herokuDeployData.releaseCreatedAt)
+      |
+      |リリース
+      |
+      = herokuDeployData.releaseVersion
+      |
+      |(#{helpers.formatCommit(herokuDeployData.slugCommit)})
+
+  h3 チャットごとのメッセージ数
+  .table-responsive
+    table.table
+      thead
+        th| チャットID
+        th| チャット名
+        th| メッセージ数
+        th| 表示する
+      tbody
+        each count in countByChat
+          tr
+            td
+              a(href=helpers.youtubeLink(count.chatId), target='_blank')= count.chatId
+            td= count.title
+            td= count.messageCount
+            td
+              a(href=`/?chatId=${count.chatId}`, target='_blank') 表示

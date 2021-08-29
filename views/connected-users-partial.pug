@@ -1,0 +1,9 @@
+if query.chatId
+  p 現在このチャットに参加しているユーザー（#{recentUsers.length}人）
+else
+  p 最近チャットやってるユーザー（#{recentUsers.length}人）
+.recent-users-list
+  each user in recentUsers
+    .recent-users-user.mb-3(data-recent-message-count=user.count)
+      img.mr-4(src=user.icon)
+      a(href=`/?${helpers.toQueryString({ author: user.author, chatId: query.chatId })}`)= user.author
