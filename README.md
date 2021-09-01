@@ -39,4 +39,7 @@ API_KEY=xxxxxxxxyyyyyyyyyyyzzzzzzzz
 
 # Key for Google Analytics (leave empty or don't define in order to turn off GA).
 GOOGLE_ANALYTICS_KEY=G-XXXXXXXXXX
+
+# How many messages per page.
+PER_PAGE=100
 ```

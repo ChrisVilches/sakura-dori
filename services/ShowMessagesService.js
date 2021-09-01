@@ -9,7 +9,7 @@ class ShowMessagesService {
     const query = {
       where,
       page: params.page || 1,
-      paginate: 100,
+      paginate: Number(process.env.PER_PAGE),
       order: [['createdAt', 'DESC']]
     };
 
