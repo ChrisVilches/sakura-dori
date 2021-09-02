@@ -11,6 +11,10 @@ module.exports = {
     res.locals.currentPath = req.path;
     next();
   },
+  setBaseUrl: (req, res, next) => {
+    res.locals.baseUrl = process.env.BASE_URL;
+    next();
+  },
   basicAuth: basicAuth({
     challenge: true,
     users: { admin: 'supersecret' }

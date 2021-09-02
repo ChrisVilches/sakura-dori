@@ -42,4 +42,7 @@ GOOGLE_ANALYTICS_KEY=G-XXXXXXXXXX
 
 # How many messages per page.
 PER_PAGE=100
+
+# Deploy URL base.
+BASE_URL=http://deploy-base-url.com
 ```

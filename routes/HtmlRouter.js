@@ -1,7 +1,7 @@
 const BaseRouter = require('./BaseRouter');
 const express = require('express');
 const app = express();
-const { setHtmlTitle, setCurrentPath, basicAuth, analytics } = require('../middlewares/htmlMiddleware');
+const { setBaseUrl, setHtmlTitle, setCurrentPath, basicAuth, analytics } = require('../middlewares/htmlMiddleware');
 
 class HtmlRouter extends BaseRouter{
   static applyMiddlewares(router){
@@ -18,6 +18,9 @@ class HtmlRouter extends BaseRouter{
 
     // To be able to highlight the current page in HTML.
     router.use(setCurrentPath);
+
+    // Set base URL to be used inside <base>.
+    router.use(setBaseUrl);
   }
 }
 
