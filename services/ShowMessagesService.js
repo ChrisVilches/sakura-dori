@@ -7,6 +7,8 @@ const R = require('ramda');
 // how many pages there are left.
 //
 // Deprecating ILIKE '%xxx%' searches, and just use ILIKE 'xxx%' or full-text search features.
+//
+// In Digital Ocean it became kind of slow, but using optimizations it can become really fast again.
 class ShowMessagesService {
   async find(params = {}){
     params = this.#compactParams(params);
