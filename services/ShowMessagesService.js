@@ -54,24 +54,32 @@ class ShowMessagesService {
   }
 
   #whereFilters = params => {
+    const exactString = params.exact == 'true';
+
     return R.mergeAll([
       this.#filterByChat(params.chatId),
-      this.#filterByAuthor(params.author),
-      this.#filterByText(params.text),
+      this.#filterByAuthor(params.author, exactString),
+      this.#filterByText(params.text, exactString),
       this.#filterByDate(params.dateFrom, params.dateTo)
     ]);
   }
 
-  #filterByAuthor = author => {
+  #filterByAuthor = (author, exact) => {
     if(typeof author == 'string' && author.trim().length > 0){
-      return { author: { [Op.iLike]: `%${author.trim()}%` } };
+      author = author.trim();
+      const likeSearch = { author: { [Op.iLike]: `%${author.trim()}%` } };
+      const exactSearch = { author };
+      return exact ? exactSearch : likeSearch;
     }
     return {};
   }
 
-  #filterByText = text => {
+  #filterByText = (text, exact) => {
     if(typeof text == 'string' && text.trim().length > 0){
-      return { text: { [Op.iLike]: `%${text.trim()}%` } };
+      text = text.trim();
+      const likeSearch = { text: { [Op.iLike]: `%${text.trim()}%` } };
+      const exactSearch = { text };
+      return exact ? exactSearch : likeSearch;
     }
     return {};
   }

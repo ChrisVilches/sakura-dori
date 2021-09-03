@@ -6,4 +6,4 @@ else
   each user in recentUsers
     .recent-users-user.mb-3(data-recent-message-count=user.count)
       img.mr-4(src=user.icon)
-      a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId })}`)= user.author
+      a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)= user.author

@@ -20,7 +20,7 @@ const reorderDates = (req, _res, next) => {
   next();
 }
 
-const pickSearchParams = R.pick(['chatId', 'text', 'author', 'dateFrom', 'dateTo', 'page']);
+const pickSearchParams = R.pick(['chatId', 'text', 'author', 'dateFrom', 'dateTo', 'page', 'exact']);
 
 const setChatData = async (req, res, next) => {
   const chatsService = new ChatsService();
