@@ -10,6 +10,14 @@ const R = require('ramda');
 // Deprecating ILIKE '%xxx%' searches, and just use ILIKE 'xxx%' or full-text search features.
 //
 // In Digital Ocean it became kind of slow, but using optimizations it can become really fast again.
+//
+// Another way to optimize is to paginate when search is empty (for all pages), which is very fast
+// when using the fast count, but don't paginate (leave like a "infinite scroll" mechanism) if the
+// search form was filled (chat ID, text, etc). Infinite scroll uses a "last ID" to know where to fetch from,
+// so it doesn't need to execute an expensive "OFFSET".
+//
+// Also, when filtering by username, create a flag that says "exact" (boolean) which uses == comparison
+// using indexes, instead of ILIKE.
 class ShowMessagesService {
   async find(params = {}){
     params = this.#compactParams(params);
