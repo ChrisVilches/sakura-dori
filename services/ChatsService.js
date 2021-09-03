@@ -13,6 +13,13 @@ class ChatsService {
     });
   }
 
+  async setCorrectMessageCount(chatId){
+    const correctCount = await Message.count({ where: { chatId } });
+    const chat = await Chat.findOne({ where: { chatId } });
+    chat.messageCount = correctCount;
+    await chat.save();
+  }
+
   // TODO: Optimize this. It's too slow. For now it's unused.
   async fetchLastMessageDateForChats(){
     throw new Error('Optimize before using.');

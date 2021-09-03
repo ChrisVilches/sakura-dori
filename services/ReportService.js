@@ -28,28 +28,11 @@ class ReportService {
     }
   }
 
-  async countMessageGroupByChat(){
-    const chats = await Chat.findAll();
-    const counts = await Message.findAll({
-      attributes: [
-        'chatId',
-        [sequelize.fn('count', sequelize.col('chat_id')), 'messageCount']
-      ],
-      group: 'chatId',
-      raw: true
-    });
-
-    // Add chat title name to count object.
-    // TODO: This can be fixed after I have created the associations with table relationships.
-    //       As of now, they tables/models are not associated.
-    return counts.map(count => {
-      const chat = chats.find(chat => chat.chatId == count.chatId);
-      return { ...count, title: chat.title };
-    });
-  }
-
   async countAll(){
-    return await Message.count();
+    let fastCountQuery = "SELECT n_live_tup FROM pg_stat_all_tables WHERE relname = 'messages';";
+    const [results] = await sequelize.query(fastCountQuery);
+    const totalRecords = +results[0].n_live_tup;
+    return totalRecords;
   }
 }
 

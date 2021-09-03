@@ -1,19 +1,10 @@
-require('dotenv').config();
+require('./appConfig').config();
 const express = require('express');
 const path = require('path');
-const moment = require('moment-timezone');
-const setTZ = require('set-tz');
 const indexHelpers = require('./helpers/index_helpers');
 const applicationMiddleware = require('./middlewares/applicationMiddleware');
 const { syncAllModels } = require('./dbconnection');
 const { matchUnknownRoute, handleErrors } = require('./middlewares/errorMiddleware');
-
-const TIMEZONE = 'Asia/Tokyo';
-const LOCALE = 'ja';
-
-setTZ(TIMEZONE);
-moment.locale(LOCALE);
-moment.tz.setDefault(TIMEZONE);
 
 (async function(){
   await syncAllModels();

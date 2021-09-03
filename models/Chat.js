@@ -3,7 +3,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Chat = sequelize.define('chats', {
     chatId: DataTypes.STRING,
-    title: DataTypes.STRING
+    title: DataTypes.STRING,
+    messageCount: DataTypes.INTEGER
   }, {
     underscored: true,
     // Note: Indexes are for now just added directly to the database

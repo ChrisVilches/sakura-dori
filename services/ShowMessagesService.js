@@ -1,5 +1,6 @@
-const { sequelize, Message } = require('../dbconnection');
+const { Message } = require('../dbconnection');
 const { Op } = require('sequelize');
+const ReportService = require('./ReportService');
 const R = require('ramda');
 
 // Other ways to optimize this:
@@ -16,7 +17,7 @@ class ShowMessagesService {
 
     const query = {
       where,
-      order: [['id', 'DESC']]
+      order: [['createdAt', 'DESC']]
     };
 
     let paginatedMessages;
@@ -27,9 +28,7 @@ class ShowMessagesService {
     //
     // TODO: For now, it only works for first page only.
     if(Object.keys(params).length == 0 || (Object.keys(params).length == 1 && params.page == 1)) {
-      let fastCountQuery = "SELECT n_live_tup FROM pg_stat_all_tables WHERE relname = 'messages';";
-      const [results] = await sequelize.query(fastCountQuery);
-      const totalRecords = +results[0].n_live_tup;
+      const totalRecords = await this.#countAll();
       query.limit = process.env.PER_PAGE;
 
       paginatedMessages = {
@@ -88,6 +87,10 @@ class ShowMessagesService {
     }
 
     return {};
+  }
+
+  #countAll = async () => {
+    return (new ReportService()).countAll();
   }
 
   #compactParams = params => {

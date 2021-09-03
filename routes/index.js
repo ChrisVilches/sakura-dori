@@ -64,12 +64,13 @@ router.get('/about', function(_req, res){
 
 router.get('/report', async function(req, res){
   const reportService = new ReportService();
+  const chatsService = new ChatsService();
 
   const reportData = {
     latestMessage: await reportService.latestMessage(),
     totalCount: await reportService.countAll(),
     environment: req.app.get('env'),
-    countByChat: await reportService.countMessageGroupByChat(),
+    chats: await chatsService.fetchAllChats(),
     herokuDeployData: reportService.herokuDeployData(),
     activeUsers: {
       userCount: Object.keys(recentUsersService.getRecentUsers()).length,

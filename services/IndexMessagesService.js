@@ -1,4 +1,4 @@
-const { Message, sequelize } = require('../dbconnection');
+const { Message, Chat, sequelize } = require('../dbconnection');
 const camelcaseKeys = require('camelcase-keys');
 
 const IndexState = Object.freeze({ MARKED_AS_DELETED: 1, INDEXED: 2, SKIPPED: 3, ERROR: 4 });
@@ -64,6 +64,14 @@ class IndexMessagesService {
           deleted: message.deleted,
           chatId: message.chatId
         }, { transaction: t });
+
+        // Increase one to message count. This can be done better with a trigger.
+
+        const chat = await Chat.findOne({
+          where: { chatId: message.chatId }
+        }, { transaction: t });
+
+        await chat.increment('messageCount', { transaction: t });
 
         return IndexState.INDEXED;
       });

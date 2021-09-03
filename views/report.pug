@@ -39,11 +39,11 @@ block content
         th| メッセージ数
         th| 表示する
       tbody
-        each count in countByChat
+        each chat in chats
           tr
             td
-              a(href=helpers.youtubeLink(count.chatId), target='_blank')= count.chatId
-            td= count.title
-            td= count.messageCount
+              a(href=helpers.youtubeLink(chat.chatId), target='_blank')= chat.chatId
+            td= chat.title
+            td= chat.messageCount
             td
-              a(href=`?chatId=${count.chatId}`, target='_blank') 表示
+              a(href=`?chatId=${chat.chatId}`, target='_blank') 表示
