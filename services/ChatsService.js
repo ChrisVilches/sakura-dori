@@ -35,7 +35,7 @@ class ChatsService {
     return R.mergeAll(lastMessages.map(m => ({ [m.chatId]: m.createdAt })));
   }
 
-  async upsertChat(chatId = '', title = ''){
+  async upsertChat(chatId = '', title = '', imageUrl = ''){
     chatId = chatId.trim();
     title = title.trim();
 
@@ -48,10 +48,15 @@ class ChatsService {
       if(found){
         // Update title only.
         found.title = title;
+
+        // Update Image URL only if it's not empty.
+        if(typeof imageUrl == 'string' && imageUrl.length > 0){
+          found.imageUrl = imageUrl;
+        }
         return await found.save({ transaction: t });
       }
 
-      return await Chat.create({ chatId, title }, { transaction: t });
+      return await Chat.create({ chatId, title, imageUrl }, { transaction: t });
     });
   }
 }

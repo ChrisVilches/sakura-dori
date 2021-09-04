@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Chat = sequelize.define('chats', {
     chatId: DataTypes.STRING,
     title: DataTypes.STRING,
+    imageUrl: DataTypes.STRING,
     messageCount: DataTypes.INTEGER
   }, {
     underscored: true,

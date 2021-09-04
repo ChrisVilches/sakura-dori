@@ -11,8 +11,8 @@ router.put('/index_messages', async function(req, res) {
 });
 
 router.put('/index_chat_title', async function(req, res) {
-  const { chatId, title } = req.body;
-  const chatRecord = await chatsService.upsertChat(chatId, title);
+  const { chatId, title, imageUrl } = req.body;
+  const chatRecord = await chatsService.upsertChat(chatId, title, imageUrl);
   res.json(chatRecord);
 });
 
