@@ -39,6 +39,12 @@ const youtubeLink = chatId => `https://www.youtube.com/watch?v=${chatId}`;
 
 const formatCommit = R.take(7);
 
+const translateEnvironment = env => {
+  if(env == 'development') return '開発環境';
+  if(env == 'production') return '本番サイト';
+  return env;
+}
+
 module.exports = {
   formatDate,
   formatDateDetail,
@@ -49,5 +55,6 @@ module.exports = {
   formatCommit,
   toQueryString,
   isOlderThanDays,
-  secToMin
+  secToMin,
+  translateEnvironment
 };

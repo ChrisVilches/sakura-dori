@@ -9,7 +9,7 @@ block content
         input(type='date', name='dateTo', value=query.dateTo)
       .clearfix
       .col-md-6.input-field
-        select(name='chatId')
+        select.form-select(name='chatId')
           option(value = '')
             | すべての配信
           each chat in chats
@@ -17,13 +17,13 @@ block content
 
       .clearfix
       .col-md-6.input-field
-        input(name='author', placeholder='ユーザー名で絞り込み', value=query.author)
+        input.form-control(name='author', placeholder='ユーザー名で絞り込み', value=query.author)
 
       .col-md-6.input-field
-        input(name='text', placeholder='メッセージの内容で絞り込み', value=query.text)
+        input.form-control(name='text', placeholder='メッセージの内容で絞り込み', value=query.text)
 
-      .input-field
-        button(type='submit')
+      .input-field.d-grid.gap-2.d-md-block
+        button.btn.btn-primary(type='submit')
           | 検索
 
   if recentUsers.length > 0
@@ -49,7 +49,7 @@ block content
               = msg.chatId
           .mb-2
               .d-inline
-                img.mr-4(src=msg.icon)
+                img.user-icon.user-icon-before-text.mr-4(src=msg.icon)
               = msg.author
           .clearfix
           .messages-text= msg.text

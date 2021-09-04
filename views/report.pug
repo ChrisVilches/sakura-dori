@@ -4,31 +4,37 @@ block variables
   - subtitle = 'システムの状態'
 
 block content
-  h3 最新のメッセージ
-  p
-    = helpers.formatDate(latestMessage.createdAt)
-    |（#{helpers.formatDateAgo(latestMessage.createdAt)}）
-
-  h3 メッセージ総数
-  p= totalCount
-
-  h3 オンラインユーザーの取得方法
-  p
-    |#{helpers.secToMin(activeUsers.withinSeconds)}分前オンラインだったユーザーを含む
-    |(#{activeUsers.intervalSeconds}秒おきに更新)。
-    |現在#{activeUsers.userCount}人がオンラインです。
-
-  h3 環境
-  p= environment
-  if herokuDeployData
-    p
-      = helpers.formatDate(herokuDeployData.releaseCreatedAt)
-      |
-      |リリース
-      |
-      = herokuDeployData.releaseVersion
-      |
-      |(#{helpers.formatCommit(herokuDeployData.slugCommit)})
+  .row
+    .col-md-3.col-sm-6.mb-2.report-item-container
+      i.fa.fa-envelope-open.mb-4
+      h3 最新のメッセージ
+      p
+        = helpers.formatDate(latestMessage.createdAt)
+        |（#{helpers.formatDateAgo(latestMessage.createdAt)}）
+    .col-md-3.col-sm-6.mb-2.report-item-container
+      i.fa.fa-comments.mb-4
+      h3 メッセージ総数
+      p= totalCount
+    .col-md-3.col-sm-6.mb-2.report-item-container
+      i.fa.fa-users.mb-4
+      h3 オンラインユーザー取得方法
+      p
+        |#{helpers.secToMin(activeUsers.withinSeconds)}分前オンラインだったユーザーを含む
+        |(#{activeUsers.intervalSeconds}秒おきに更新)。
+        |現在#{activeUsers.userCount}人がオンラインです。
+    .col-md-3.col-sm-6.mb-2.report-item-container
+      i.fa.fa-server.mb-4
+      h3 環境
+      p= helpers.translateEnvironment(environment)
+      if herokuDeployData
+        p
+          = helpers.formatDate(herokuDeployData.releaseCreatedAt)
+          |
+          |リリース
+          |
+          = herokuDeployData.releaseVersion
+          |
+          |(#{helpers.formatCommit(herokuDeployData.slugCommit)})
 
   h3 チャットごとのメッセージ数
   .table-responsive

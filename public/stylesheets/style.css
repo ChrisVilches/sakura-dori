@@ -4,11 +4,21 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #82CCF0;
+  text-decoration: none;
 }
 
 a:hover{
-  color: #00B7FF;
+  color: #6592A8;
+}
+
+.top-logo {
+  margin: 13px 0;
+  font-size: 2.3em;
+}
+
+.top-logo a, .top-logo a:hover {
+  color:black;
 }
 
 .alert-expired{
@@ -46,7 +56,7 @@ h3 {
 }
 
 .input-field {
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 }
 
 .input-field input, .input-field select{
@@ -105,6 +115,42 @@ td, th {
   padding-right: 15px;
 }
 
-.recent-users-user img {
-  padding-right: 5px;
+.user-icon {
+  border-radius: 8px;
+}
+
+.user-icon-before-text {
+  margin-right: 5px;
+}
+
+.report-item-container {
+  text-align: center;
+}
+
+.report-item-container i{
+  width: 100%;
+  text-align: center;
+  font-size: 4em;
+  color: #ccc;
+}
+
+/**** Bootstrap overrides ****/
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #1a1a27;
+  border-color: #1a1a27;
+  color: #a2a3b7;
+}
+
+.btn-primary:hover {
+  background-color: #1B1B28;
+  border-color: #1B1B28;
+}
+
+.btn-primary:disabled {
+  background-color: #aaa;
+  border-color: #aaa;
 }

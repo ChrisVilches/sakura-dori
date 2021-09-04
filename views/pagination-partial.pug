@@ -1,5 +1,6 @@
 .pagination-container
-  = `${helpers.numberFormat(total)}件数 | `
+  p
+    = `${helpers.numberFormat(total)}件数`
   if query.page > 1
     a(href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)| ←
   = `ページ ${query.page}/${pages}`
