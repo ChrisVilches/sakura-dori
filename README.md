@@ -45,4 +45,7 @@ PER_PAGE=100
 
 # Deploy URL base.
 BASE_URL=http://deploy-base-url.com
+
+# In the main page (i.e. not /archive), limit the dateFrom to X days ago.
+LIMIT_DATE_FROM_DAYS_AGO=3
 ```

@@ -2,6 +2,8 @@ const ShowMessagesService = require('../services/ShowMessagesService');
 const ChatsService = require('../services/ChatsService');
 const ReportService = require('../services/ReportService');
 const recentUsersService = require('../services/RealTimeRecentUsersInstance');
+const { limitDateFrom } = require('../middlewares/permissionMiddleware');
+const { basicAuth } = require('../middlewares/htmlMiddleware');
 const parallel = require('parallel-express-middleware');
 const R = require('ramda');
 const router = require('./HtmlRouter').create();
@@ -10,8 +12,8 @@ const router = require('./HtmlRouter').create();
 // and put them the correct way in the form.
 const reorderDates = (req, _res, next) => {
   const query = req.query;
-  if(query.dateFrom && query.dateTo){
-    if(query.dateFrom > query.dateTo){
+  if (query.dateFrom && query.dateTo) {
+    if (query.dateFrom > query.dateTo) {
       let temp = query.dateFrom;
       query.dateFrom = query.dateTo;
       query.dateTo = temp;
@@ -46,23 +48,36 @@ const performSearch = async (req, res, next) => {
   next();
 }
 
-/* GET home page. */
-router.get('/', reorderDates, setRecentUsers, parallel(setChatData, performSearch), (req, res) => {
-  const searchParams = pickSearchParams(req.query);
-  res.render('index', {
-    // Pass all form data again (to show selected values in the form), and default page value.
-    query: {
-      ...searchParams,
-      page: searchParams.page || 1
-    }
-  });
-});
+const showMessagesPageShared = [
+  setRecentUsers,
+  parallel(setChatData, performSearch),
+  (req, res) => {
+    const searchParams = pickSearchParams(req.query);
 
-router.get('/about', function(_req, res){
+    res.render('index', {
+      // Pass all form data again (to show selected values in the form), and default page value.
+      query: {
+        ...searchParams,
+        page: searchParams.page || 1
+      }
+    });
+  }
+];
+
+/**
+ * Pages / and /archive are identical, except for how dates are handled.
+ * In /, the dateFrom value is coerced so that the date range is not too big (to make queries quicker).
+ */
+
+router.get('/', reorderDates, limitDateFrom, ...showMessagesPageShared);
+
+router.get('/archive', basicAuth, reorderDates, ...showMessagesPageShared);
+
+router.get('/about', function (_req, res) {
   res.render('about');
 });
 
-router.get('/report', async function(req, res){
+router.get('/report', async function (req, res) {
   const reportService = new ReportService();
   const chatsService = new ChatsService();
 
