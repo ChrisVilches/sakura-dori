@@ -3,13 +3,8 @@ const express = require('express');
 const app = express();
 const { setBaseUrl, setHtmlTitle, setCurrentPath, basicAuth, analytics } = require('../middlewares/htmlMiddleware');
 
-class HtmlRouter extends BaseRouter{
-  static applyMiddlewares(router){
-    // To prevent other users seeing this page in the local deployment.
-    if(app.get('env') === 'development'){
-      router.use(basicAuth);
-    }
-
+class HtmlRouter extends BaseRouter {
+  static applyMiddlewares(router) {
     // Pass Google Analytics key.
     router.use(analytics);
 

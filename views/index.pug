@@ -4,7 +4,7 @@ block content
   form#message-search-form(action='' method='GET')
     .row
       .col-md-12.col-lg-6.input-field-daterange
-        input(type='date', name='dateFrom', value=query.dateFrom)
+        input(type='date', name='dateFrom', value=query.dateFrom, disabled=limitDateFrom)
         span ～
         input(type='date', name='dateTo', value=query.dateTo)
       .clearfix
