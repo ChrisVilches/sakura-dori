@@ -30,8 +30,6 @@ block content
     .mb-4
       include connected-users-partial
 
-  hr
-
   include stream-ended-notice-partial
 
   if pages > 0
@@ -45,7 +43,7 @@ block content
           small.float-end
             div(title=msg.ytId)
               = helpers.formatDate(msg.createdAt)
-            a(href=helpers.youtubeLink(msg.chatId), title=chats.find(c => c.chatId == msg.chatId).title)
+            a(href=helpers.youtubeLink(msg.chatId) data-bs-toggle='tooltip' data-bs-placement='left' title=chats.find(c => c.chatId == msg.chatId).title)
               = msg.chatId
           .mb-2
               .d-inline

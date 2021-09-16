@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #82CCF0;
+  color: #366F8B;
   text-decoration: none;
 }
 
@@ -120,7 +120,7 @@ td, th {
 }
 
 .user-icon-before-text {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .report-item-container {
@@ -140,17 +140,40 @@ td, th {
 .btn-primary:active,
 .btn-primary:visited,
 .btn-primary:focus {
-  background-color: #1a1a27;
-  border-color: #1a1a27;
-  color: #a2a3b7;
+  background-color: #247CAD;
+  border-color: #247CAD;
+  color: #F3FAFE;
+  padding: 10px 30px;
 }
 
 .btn-primary:hover {
-  background-color: #1B1B28;
-  border-color: #1B1B28;
+  background-color: #155172;
+  border-color: #155172;
 }
 
 .btn-primary:disabled {
   background-color: #aaa;
   border-color: #aaa;
+}
+
+.icon-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.chat-item {
+  margin-bottom: 50px;
+}
+
+.chat-item-image-container{
+  width: 142px;
+  height: 80px;
+  display: inline-block;
+  background-color: #ccc;
+  margin-right: 15px;
+}
+
+.chat-item-image-container img{
+  width: 100%;
 }

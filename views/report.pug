@@ -36,20 +36,18 @@ block content
           |
           |(#{helpers.formatCommit(herokuDeployData.slugCommit)})
 
-  h3 チャットごとのメッセージ数
-  .table-responsive
-    table.table
-      thead
-        th| チャットID
-        th| チャット名
-        th| メッセージ数
-        th| 表示する
-      tbody
-        each chat in chats
-          tr
-            td
-              a(href=helpers.youtubeLink(chat.chatId), target='_blank')= chat.chatId
-            td= chat.title
-            td= chat.messageCount
-            td
-              a(href=`?chatId=${chat.chatId}`, target='_blank') 表示
+  each chat in chats
+    .chat-item
+      div
+        a(href=helpers.youtubeLink(chat.chatId), target='_blank')
+          .mr-4.chat-item-image-container
+            if chat.imageUrl != null
+              img(src=chat.imageUrl)
+          span.align-middle
+            = chat.title
+
+          // TODO: Fix this layout.
+
+          a(href=`?chatId=${chat.chatId}`, target='_blank')
+            = helpers.numberFormat(chat.messageCount)
+            |件数
