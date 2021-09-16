@@ -1,8 +1,14 @@
-.pagination-container
-  p
-    = `${helpers.numberFormat(total)}件数`
-  if query.page > 1
-    a(href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)| ←
-  = `ページ ${query.page}/${pages}`
-  if query.page < pages
-    a(href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)| →
+.pagination-container.d-flex.justify-content-between
+  div
+    if query.page > 1
+      a.btn.btn-secondary.icon-button(href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)
+        .fa.fa-arrow-left
+
+  div
+    = `ページ ${query.page}/${pages}`
+    p= `${helpers.numberFormat(total)}件数`
+
+  div
+    if query.page < pages
+      a.btn.btn-secondary.icon-button.pull-right(href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)
+        .fa.fa-arrow-right
