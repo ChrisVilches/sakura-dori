@@ -91,15 +91,15 @@ class ShowMessagesService {
 
   #filterByDate = (from, to) => {
     if(from && to){
-      return { timestamp: { [Op.between]: [from, to] } };
+      return { createdAt: { [Op.between]: [from, to] } };
     }
 
     if(from) {
-      return { timestamp: { [Op.gte]: from } };
+      return { createdAt: { [Op.gte]: from } };
     }
 
     if(to) {
-      return { timestamp: { [Op.lte]: to } };
+      return { createdAt: { [Op.lte]: to } };
     }
 
     return {};
