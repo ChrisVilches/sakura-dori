@@ -6,7 +6,7 @@ const applicationMiddleware = require('./middlewares/applicationMiddleware');
 const { syncAllModels } = require('./dbconnection');
 const { matchUnknownRoute, handleErrors } = require('./middlewares/errorMiddleware');
 
-(async function(){
+(async function () {
   await syncAllModels();
   // Connect to DB by executing a query at service startup.
   const ReportService = require('./services/ReportService');

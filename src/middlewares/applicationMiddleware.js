@@ -22,6 +22,6 @@ module.exports = [
   express.json({ limit: '50mb', extended: true }),
   express.urlencoded({ limit: '50mb', extended: true }),
   cookieParser(),
-  express.static(path.join(require('path').resolve('./'), 'public')),
+  express.static(path.join(require('path').resolve('./'), 'dist')),
   requestToCamelCase
 ];

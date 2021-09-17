@@ -2,9 +2,9 @@ const { Chat, Message, sequelize } = require('../dbconnection');
 const R = require('ramda');
 
 class ReportService {
-  async latestMessage(){
+  async latestMessage() {
     return await Message.findOne({
-      order: [[ 'id', 'DESC' ]],
+      order: [['id', 'DESC']],
     });
   }
 
@@ -19,7 +19,7 @@ class ReportService {
 
     const map = R.pickAll(keys, process.env);
 
-    if(R.all(isPresentString, R.values(map))){
+    if (R.all(isPresentString, R.values(map))) {
       return R.map(R.trim, {
         releaseCreatedAt: map.HEROKU_RELEASE_CREATED_AT,
         releaseVersion: map.HEROKU_RELEASE_VERSION,
@@ -28,7 +28,7 @@ class ReportService {
     }
   }
 
-  async countAll(){
+  async countAll() {
     let fastCountQuery = "SELECT n_live_tup FROM pg_stat_all_tables WHERE relname = 'messages';";
     const [results] = await sequelize.query(fastCountQuery);
     const totalRecords = +results[0].n_live_tup;
