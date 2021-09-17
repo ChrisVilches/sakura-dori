@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "npm run webpack:production",
     "start": "node ./bin/www",
-    "dev": "concurrently --kill-others \"nodemon --exec npm start\" \"npm run webpack:development\"",
-    "deploy": "npm run webpack:production && NODE_ENV=production npm start",
+    "dev": "concurrently --kill-others \"nodemon --exec NODE_ENV=development npm start\" \"npm run webpack:development\"",
     "webpack:development": "webpack --config webpack/dev.config.js",
     "webpack:production": "webpack --config webpack/prod.config.js"
   },
