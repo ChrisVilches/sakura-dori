@@ -6,8 +6,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ASSETS_FOLDER = path.resolve(__dirname, '../src', 'assets');
 const DIST_FOLDER = path.resolve(__dirname, '../dist');
 
-// TODO: How to hot reload (with express + pug)
-
 module.exports = {
   name: appName,
   entry: [

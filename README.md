@@ -11,8 +11,11 @@ npm install
 # Needs to install this first.
 npm install -g nodemon
 
-# Then run with automatic reload.
-npm run watch # nodemon --exec npm start
+# Then run with automatic reload (individual reloaders for both Express and Webpack).
+npm run dev
+
+# Deploy in production mode (build + start server).
+npm run deploy
 ```
 
 **Note:** If `nodemon` starts to fail, clone the repo and install again (working solution to the `Port 3000 is already in use` issue). Rebooting the computer seems to solve this issue as well.
