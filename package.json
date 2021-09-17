@@ -6,8 +6,7 @@
     "start": "node ./bin/www",
     "watch": "nodemon --exec npm start",
     "webpack:development": "webpack --config webpack/dev.config.js",
-    "webpack:production": "webpack --config webpack/prod.config.js",
-    "webpack:serve": "webpack serve"
+    "webpack:production": "webpack --config webpack/prod.config.js"
   },
   "dependencies": {
     "camelcase-keys": "^6.2.2",
