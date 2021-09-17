@@ -1,2 +1,4 @@
 @import '@styles/bootstrap-theme.min.css';
-@import '@styles/style.css';
+@import '@styles/bootstrap-overrides.css';
+@import '@styles/main.css';
+@import '@styles/report.css';
