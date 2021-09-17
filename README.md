@@ -11,9 +11,6 @@ npm install
 # Needs to install this first.
 npm install -g nodemon
 
-# This variable is needed.
-export DATABASE_URL=postgres://myuser:myuser@localhost:5432/youtube_chat_logger
-
 # Then run with automatic reload.
 npm run watch # nodemon --exec npm start
 ```
