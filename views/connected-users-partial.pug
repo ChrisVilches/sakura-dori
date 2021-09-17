@@ -3,8 +3,30 @@ if query.chatId
 else
   p 最近チャットやってるユーザー（#{recentUsers.length}人）
 .recent-users-list
-  each user in recentUsers
+  each user in recentUsers.slice(0, 10)
     .recent-users-user.mb-3(data-recent-message-count=user.count)
       a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)
         img.user-icon.user-icon-before-text.mr-4(src=user.icon)
         =user.author
+
+  button.btn.btn-secondary(type="button" data-bs-toggle="modal" data-bs-target="#userListModal")
+    i.fa.fa-plus
+
+#userListModal.modal.fade(tabindex="-1" aria-labelledby="userListModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#userListModalLabel
+          |ユーザー
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+
+      .modal-body
+        .recent-users-list
+          each user in recentUsers
+            .recent-users-user.mb-3(data-recent-message-count=user.count)
+              a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)
+                img.user-icon.user-icon-before-text.mr-4(src=user.icon)
+                =user.author
+      .modal-footer
+        button.btn.btn-secondary(type="button" data-bs-dismiss="modal")
+          |閉じる

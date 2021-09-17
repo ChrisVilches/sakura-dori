@@ -63,13 +63,15 @@ h3 {
   width: 100%;
 }
 
-.input-field-daterange {
-  margin-bottom: 20px;
-}
-
 .pagination-container {
+  padding-bottom: 20px;
+  padding-top: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
+}
+
+.visibility-hidden{
+  visibility: hidden;
 }
 
 table {
@@ -106,8 +108,8 @@ td, th {
 }
 
 .recent-users-list {
-  max-height: 150px;
-  overflow-y: auto;
+  /*max-height: 150px;
+  overflow-y: auto;*/
 }
 
 .recent-users-user {
@@ -134,6 +136,10 @@ td, th {
   color: #ccc;
 }
 
+.donate-text {
+  display: inline-block;
+}
+
 /**** Bootstrap overrides ****/
 
 .btn-primary,
@@ -157,9 +163,11 @@ td, th {
 }
 
 .icon-button {
+  /*
   width: 30px;
   height: 30px;
   border-radius: 5px;
+  */
 }
 
 .chat-item {

@@ -1,14 +1,13 @@
 .pagination-container.d-flex.justify-content-between
-  div
-    if query.page > 1
-      a.btn.btn-secondary.icon-button(href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)
-        .fa.fa-arrow-left
+  .align-self-center
+    a.btn.btn-secondary(class=`${query.page == 1 ? 'visibility-hidden' : ''}` href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)
+      .fa.fa-arrow-left
 
-  div
+  .align-self-center.text-center
     = `ページ ${query.page}/${pages}`
-    p= `${helpers.numberFormat(total)}件数`
+    br
+    =`${helpers.numberFormat(total)}件数`
 
-  div
-    if query.page < pages
-      a.btn.btn-secondary.icon-button.pull-right(href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)
-        .fa.fa-arrow-right
+  .align-self-center
+    a.btn.btn-secondary(class=`${query.page == pages ? 'visibility-hidden' : ''}` href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)
+      .fa.fa-arrow-right

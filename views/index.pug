@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  form#message-search-form(action='' method='GET')
+  form#message-search-form.mb-2(action='' method='GET')
     .row
-      .col-md-12.col-lg-6.input-field-daterange
-        input(type='date', name='dateFrom', value=query.dateFrom, disabled=limitDateFrom)
-        span ～
-        input(type='date', name='dateTo', value=query.dateTo)
+      .col-md-6.input-field
+        input.form-control(type='date', name='dateFrom', value=query.dateFrom, disabled=limitDateFrom)
+      .col-md-6.input-field
+        input.form-control(type='date', name='dateTo', value=query.dateTo)
       .clearfix
       .col-md-6.input-field
         select.form-select(name='chatId')
@@ -24,10 +24,10 @@ block content
 
       .input-field.d-grid.gap-2.d-md-block
         button.btn.btn-primary(type='submit')
-          | 検索
+          i.fa.fa-search
 
   if recentUsers.length > 0
-    .mb-4
+    .mb-2
       include connected-users-partial
 
   include stream-ended-notice-partial

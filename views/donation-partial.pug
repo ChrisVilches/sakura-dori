@@ -1,3 +1,22 @@
 .alert.alert-info
-  | サイトのホスティングとデータベースの利用は月2000円かかるので、寄付をお願いします！
-  a(href='images/paypay.webp', target='_blank') PayPay
+  .row
+    .col-md-9.col-sm-8.mb-2
+      .donate-text
+        | サイトのホスティングとデータベースの利用は月2000円かかるので、寄付をお願いします！
+    .col-md-3.col-sm-4.d-grid.gap-2.d-md-block
+      button.pull-right.btn.btn-primary(type="button" data-bs-toggle="modal" data-bs-target="#donateModal")
+        |寄付する
+
+#donateModal.modal.fade(tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#donateModalLabel
+          |寄付
+        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+
+      .modal-body
+        img.img-fluid(src="images/paypay.webp")
+      .modal-footer
+        button.btn.btn-secondary(type="button" data-bs-dismiss="modal")
+          |閉じる
