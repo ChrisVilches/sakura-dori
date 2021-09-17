@@ -14,7 +14,7 @@ block content
     .col-md-3.col-sm-6.mb-2.report-item-container
       i.fa.fa-comments.mb-4
       h3 メッセージ総数
-      p= totalCount
+      p= helpers.numberFormat(totalCount)
     .col-md-3.col-sm-6.mb-2.report-item-container
       i.fa.fa-users.mb-4
       h3 オンラインユーザー取得方法
@@ -40,7 +40,7 @@ block content
     .chat-item
       div
         a(href=helpers.youtubeLink(chat.chatId), target='_blank')
-          .mr-4.chat-item-image-container
+          .me-3.chat-item-image-container
             if chat.imageUrl != null
               img(src=chat.imageUrl alt='')
           span.align-middle

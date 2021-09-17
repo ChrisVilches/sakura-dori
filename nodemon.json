@@ -3,6 +3,7 @@
   "ignore": [
     "src/assets/",
     "README.md",
-    "dist"
+    "dist",
+    "webpack/"
   ]
 }

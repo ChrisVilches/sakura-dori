@@ -1,16 +1,21 @@
-if query.chatId
-  p 現在このチャットに参加しているユーザー（#{recentUsers.length}人）
-else
-  p 最近チャットやってるユーザー（#{recentUsers.length}人）
-.recent-users-list
-  each user in recentUsers.slice(0, 10)
-    .recent-users-user.mb-3(data-recent-message-count=user.count)
-      a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)
-        img.user-icon.user-icon-before-text.mr-4(src=user.icon)
-        =user.author
+.mb-4.mt-4
+  .mt-2.d-inline-block
+    if recentUsers.length > 0
+      i.fa.fa-user.me-2
+      |最近チャットやってるユーザー（#{recentUsers.length}人）
+      button.btn.btn-secondary(type="button" data-bs-toggle="modal" data-bs-target="#userListModal")
+        |もっと見る
+        i.fa.fa-plus.ms-1
+    else
+      |現在このチャットに参加しているユーザー（#{recentUsers.length}人）
 
-  button.btn.btn-secondary(type="button" data-bs-toggle="modal" data-bs-target="#userListModal")
-    i.fa.fa-plus
+if recentUsers.length > 0
+  .recent-users-list
+    each user in recentUsers.slice(0, 10)
+      .recent-users-user.mb-3(data-recent-message-count=user.count)
+        a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)
+          img.user-icon.user-icon-before-text.me-2(src=user.icon)
+          =user.author
 
 #userListModal.modal.fade(tabindex="-1" aria-labelledby="userListModalLabel" aria-hidden="true")
   .modal-dialog
@@ -25,7 +30,7 @@ else
           each user in recentUsers
             .recent-users-user.mb-3(data-recent-message-count=user.count)
               a(href=`?${helpers.toQueryString({ author: user.author, chatId: query.chatId, exact: true })}`)
-                img.user-icon.user-icon-before-text.mr-4(src=user.icon)
+                img.user-icon.user-icon-before-text.me-2(src=user.icon)
                 =user.author
       .modal-footer
         button.btn.btn-secondary(type="button" data-bs-dismiss="modal")

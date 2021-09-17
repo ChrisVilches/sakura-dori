@@ -10,6 +10,7 @@
     "webpack:production": "webpack --config webpack/prod.config.js"
   },
   "dependencies": {
+    "bootswatch": "^5.1.1",
     "camelcase-keys": "^6.2.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -43,6 +44,8 @@
     "imagemin-jpegtran": "^7.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "nodemon": "^2.0.12",
+    "sass": "^1.41.1",
+    "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.53.0",
