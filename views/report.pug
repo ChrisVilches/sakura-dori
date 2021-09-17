@@ -42,7 +42,7 @@ block content
         a(href=helpers.youtubeLink(chat.chatId), target='_blank')
           .mr-4.chat-item-image-container
             if chat.imageUrl != null
-              img(src=chat.imageUrl)
+              img(src=chat.imageUrl alt='')
           span.align-middle
             = chat.title
 

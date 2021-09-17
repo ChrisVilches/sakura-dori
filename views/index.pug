@@ -3,9 +3,9 @@ extends layout
 block content
   form#message-search-form.mb-2(action='' method='GET')
     .row
-      .col-md-6.input-field
+      .col-6.input-field
         input.form-control(type='date', name='dateFrom', value=query.dateFrom, disabled=limitDateFrom)
-      .col-md-6.input-field
+      .col-6.input-field
         input.form-control(type='date', name='dateTo', value=query.dateTo)
       .clearfix
       .col-md-6.input-field
