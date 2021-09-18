@@ -1,5 +1,6 @@
 /* Choose a theme from https://bootswatch.com (replace .../dist/NAME/bootstrap...) */
 @import 'bootswatch/dist/vapor/bootstrap.min.css';
 @import '@styles/bootstrap-overrides.css';
+@import '@styles/daterangepicker-overrides.scss';
 @import '@styles/report.css';
 @import '@styles/main.scss';

@@ -7,9 +7,14 @@ module.exports = {
       throw new Error(`Env variable LIMIT_DATE_FROM_DAYS_AGO is not set correctly. Value is ${process.env.LIMIT_DATE_FROM_DAYS_AGO}.`);
     }
 
-    const date = moment().subtract(daysAgo, 'days').format("YYYY-MM-DD");
-    res.locals.limitDateFrom = true;
-    req.query.dateFrom = date;
+    let date = moment().subtract(daysAgo, 'days');
+
+    if (moment(req.query.dateFrom).isBefore(date)) {
+      req.query.dateFrom = date;
+    }
+
+    date = date.format("YYYY-MM-DD");
+    res.locals.limitDateFrom = date;
 
     next();
   }

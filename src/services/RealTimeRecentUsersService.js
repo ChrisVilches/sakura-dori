@@ -22,11 +22,11 @@ const cron = require('node-cron');
 */
 
 class RealTimeRecentUsersService {
-  constructor(withinSeconds, intervalSeconds){
-    if(!withinSeconds){
+  constructor(withinSeconds, intervalSeconds) {
+    if (!withinSeconds) {
       throw new Error('Specify period of user activity.');
     }
-    if(!intervalSeconds){
+    if (!intervalSeconds) {
       throw new Error('Specify periodicity (seconds).');
     }
     this.withinSeconds = withinSeconds;
@@ -44,25 +44,25 @@ class RealTimeRecentUsersService {
   // Initialize but don't begin execution.
   initializeStoppedCronTask = () => {
     const cronString = `*/${this.intervalSeconds} * * * * *`;
-    if(!cron.validate(cronString)){
+    if (!cron.validate(cronString)) {
       throw new Error(`Cron string "${cronString}" is not valid.`);
     }
 
     this.cronTask = cron.schedule(cronString, this.#periodicJob, { scheduled: false });
   }
 
-  start(){
-    if(!this.cronTask) return;
+  start() {
+    if (!this.cronTask) return;
     this.cronTask.start();
   }
 
-  stop(){
-    if(!this.cronTask) return;
+  stop() {
+    if (!this.cronTask) return;
     this.cronTask.stop();
   }
 
   getRecentUsers = chatId => {
-    if(typeof chatId == 'string' && chatId.length > 0) return this.result[chatId] || [];
+    if (typeof chatId == 'string' && chatId.length > 0) return this.result[chatId] || [];
     return this.resultAllChats || [];
   }
 
@@ -72,7 +72,7 @@ class RealTimeRecentUsersService {
     Object.entries(this.preResult).forEach(([_chat, authors]) => {
       Object.keys(authors).forEach(author => {
         authors[author] = authors[author].filter(isRecent);
-        if(authors[author].length == 0) delete authors[author];
+        if (authors[author].length == 0) delete authors[author];
       });
     });
   }
@@ -91,11 +91,11 @@ class RealTimeRecentUsersService {
   #sortByDateArray = (a, b) => {
     a = a.messageDates;
     b = b.messageDates;
-    if(a.length != b.length) return b.length - a.length;
-    for(let i=0; i<a.length; i++){
+    if (a.length != b.length) return b.length - a.length;
+    for (let i = 0; i < a.length; i++) {
       const dateA = a[i];
       const dateB = b[i];
-      if(dateA != dateB) return dateB - dateA;
+      if (dateA != dateB) return dateB - dateA;
     }
     return 0;
   }
@@ -149,7 +149,7 @@ class RealTimeRecentUsersService {
   }
 
   #saveLatestId = messages => {
-    if(messages.length == 0) return;
+    if (messages.length == 0) return;
     this.lastFetchedMessageId = R.compose(
       R.apply(Math.max),
       R.pluck('id')
@@ -157,11 +157,11 @@ class RealTimeRecentUsersService {
   }
 
   #fetchCondition = () => {
-    if(this.lastFetchedMessageId){
+    if (this.lastFetchedMessageId) {
       return { id: { [Op.gt]: this.lastFetchedMessageId } };
     } else {
-      let fromDate = moment().subtract(this.withinSeconds, 'seconds');
-      return { createdAt: { [Op.gte]: fromDate } };
+      let dateFrom = moment().subtract(this.withinSeconds, 'seconds');
+      return { createdAt: { [Op.gte]: dateFrom } };
     }
   }
 }

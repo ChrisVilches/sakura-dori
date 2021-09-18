@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  form#message-search-form.mb-2(action='' method='GET')
+  form#message-search-form.mb-2(action='' method='GET' enable-daterangepicker=true)
     .row
-      .col-6.input-field
-        input.form-control(type='date', name='dateFrom', value=query.dateFrom, disabled=limitDateFrom)
-      .col-6.input-field
-        input.form-control(type='date', name='dateTo', value=query.dateTo)
-      .clearfix
+      .col-md-6.input-field
+        input.form-control(role='daterangepicker', placeholder='日付', data-limit-date-from=limitDateFrom)
+        input(type='hidden', name='dateFrom', value=query.dateFrom)
+        input(type='hidden', name='dateTo', value=query.dateTo)
+
       .col-md-6.input-field
         select.form-select(name='chatId')
           option(value = '')

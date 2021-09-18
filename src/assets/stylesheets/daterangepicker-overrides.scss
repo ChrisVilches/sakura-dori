@@ -1,0 +1,26 @@
+@import 'bootswatch/dist/vapor/_variables.scss';
+
+$background: $body-bg!important;
+$days-off: lighten($body-bg, 5%)!important;
+$selected-range: lighten($primary, 2%)!important;
+$clicked-color: $primary!important;
+
+.daterangepicker {
+  background-color: $background;
+}
+
+.daterangepicker .calendar-table {
+  background-color: $background;
+}
+
+.daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
+  background-color: $days-off;
+}
+
+.daterangepicker td.in-range {
+  background-color: $selected-range;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: $clicked-color;
+}
