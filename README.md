@@ -49,4 +49,8 @@ BASE_URL=http://deploy-base-url.com
 
 # In the main page (i.e. not /archive), limit the dateFrom to X days ago.
 LIMIT_DATE_FROM_DAYS_AGO=3
+
+# Basic auth credentials.
+BASIC_AUTH_USERNAME=xxxxxxxx
+BASIC_AUTH_PASSWORD=yyyyyyyy
 ```

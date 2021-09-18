@@ -36,6 +36,8 @@ block content
           |
           |(#{helpers.formatCommit(herokuDeployData.slugCommit)})
 
+  .clearfix.mb-4
+
   each chat in chats
     .chat-item
       .d-flex.flex-row
@@ -44,10 +46,11 @@ block content
             .me-3.chat-item-image-container
               if chat.imageUrl != null
                 img.object-fit-cover(src=chat.imageUrl alt='')
-        div
+
+        div.flex-grow-1.pe-4
           a(href=helpers.youtubeLink(chat.chatId), target='_blank')
             = chat.title
-          p
-            a(href=`?chatId=${chat.chatId}`, target='_blank')
-              = helpers.numberFormat(chat.messageCount)
-              |件数
+        .text-end.flex-grow-2.text-nowrap(data-bs-toggle='tooltip' data-bs-placement='left' title='メッセージを表示する')
+          a(href=`?chatId=${chat.chatId}`, target='_blank')
+            = helpers.numberFormat(chat.messageCount)
+            |件数

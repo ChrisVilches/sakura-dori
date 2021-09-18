@@ -4,7 +4,7 @@
       .mb-2.d-inline-block.me-2
         i.fa.fa-user.me-2
         |最近チャットやってるユーザー（#{recentUsers.length}人）
-      button.btn.btn-secondary(type="button" data-bs-toggle="modal" data-bs-target="#userListModal")
+      button.btn.btn-secondary(type='button' data-bs-toggle='modal' data-bs-target='#userListModal')
         |もっと見る
         i.fa.fa-plus.ms-1
     else
@@ -18,13 +18,13 @@ if recentUsers.length > 0
           img.user-icon.user-icon-before-text.me-2(src=user.icon)
           =user.author
 
-#userListModal.modal.fade(tabindex="-1" aria-labelledby="userListModalLabel" aria-hidden="true")
+#userListModal.modal.fade(tabindex='-1' aria-labelledby='userListModalLabel' aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
         h5.modal-title#userListModalLabel
           |ユーザー
-        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
 
       .modal-body
         .recent-users-list
@@ -34,5 +34,5 @@ if recentUsers.length > 0
                 img.user-icon.user-icon-before-text.me-2(src=user.icon)
                 =user.author
       .modal-footer
-        button.btn.btn-secondary(type="button" data-bs-dismiss="modal")
+        button.btn.btn-secondary(type='button' data-bs-dismiss='modal')
           |閉じる

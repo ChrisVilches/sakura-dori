@@ -3,7 +3,7 @@ extends layout
 block content
   form#message-search-form.mb-2(action='' method='GET' enable-daterangepicker=true)
     .row
-      .col-md-6.input-field
+      //-.col-md-6.input-field
         input.form-control(role='daterangepicker', placeholder='日付', data-limit-date-from=limitDateFrom)
         input(type='hidden', name='dateFrom', value=query.dateFrom)
         input(type='hidden', name='dateTo', value=query.dateTo)
@@ -37,7 +37,7 @@ block content
       include pagination-partial
 
     each msg in messages
-      .row.message-container.mb-4(class=(msg.deleted ? 'message-deleted' : '')
+      .row.message-container(class=(msg.deleted ? 'message-deleted' : '')
         data-timestamp=helpers.formatDateDetail(msg.timestamp) data-created-at=helpers.formatDateDetail(msg.createdAt))
         .col-md-12
           .message-detail-info.float-end

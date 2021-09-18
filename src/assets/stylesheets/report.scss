@@ -1,0 +1,28 @@
+$grey: #ccc;
+
+.report-item-container {
+  text-align: center;
+}
+
+.report-item-container i{
+  width: 100%;
+  text-align: center;
+  font-size: 4em;
+}
+
+.chat-item {
+  margin-bottom: 50px;
+}
+
+.chat-item-image-container{
+  width: 142px;
+  height: 80px;
+  display: inline-block;
+  background-color: $grey;
+  opacity: 0.2;
+  margin-right: 15px;
+}
+
+.chat-item-image-container img{
+  width: 100%;
+}

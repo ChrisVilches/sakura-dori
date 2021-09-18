@@ -25,19 +25,3 @@
   border-radius: 5px;
   */
 }
-
-.chat-item {
-  margin-bottom: 50px;
-}
-
-.chat-item-image-container{
-  width: 142px;
-  height: 80px;
-  display: inline-block;
-  background-color: #ccc;
-  margin-right: 15px;
-}
-
-.chat-item-image-container img{
-  width: 100%;
-}

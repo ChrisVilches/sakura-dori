@@ -1,4 +1,10 @@
-.alert.alert-info
+//- Small screen
+.d-block.d-sm-none.float-end
+  button.btn.btn-primary(type="button" data-bs-toggle="modal" data-bs-target="#donateModal")
+    |寄付する
+
+//- Big screen
+.alert.alert-info.d-none.d-sm-block
   .row
     .col-md-9.col-sm-8.mb-2
       .donate-text

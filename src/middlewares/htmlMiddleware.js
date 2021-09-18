@@ -17,7 +17,7 @@ module.exports = {
   },
   basicAuth: basicAuth({
     challenge: true,
-    users: { admin: 'supersecret' }
+    users: { [process.env.BASIC_AUTH_USERNAME]: process.env.BASIC_AUTH_PASSWORD }
   }),
   analytics: (_req, res, next) => {
     const key = (process.env.GOOGLE_ANALYTICS_KEY || '').trim();
