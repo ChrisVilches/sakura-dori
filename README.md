@@ -1,5 +1,9 @@
 # さくら通り
 
+Frontend for viewing data scraped by [Youtube Chat Logger](https://github.com/ChrisVilches/youtube-chat-logger).
+
+See a [live demo](http://cloud.chrisvilches.com/live_demos/sakura-dori/).
+
 ## Execution
 
 Run app locally and reload on file change.
@@ -54,3 +58,17 @@ LIMIT_DATE_FROM_DAYS_AGO=3
 BASIC_AUTH_USERNAME=xxxxxxxx
 BASIC_AUTH_PASSWORD=yyyyyyyy
 ```
+
+## Tools used
+
+Made with:
+
+* Express.js (Node)
+* Pug (templating engine)
+* Webpack
+* Bootstrap 5
+* SASS
+* PostgreSQL
+* Electron
+
+Also, unlike most of my other projects, almost no Javascript was used in the frontend (pages are server rendered), as it was originally meant to be an old school looking website (but I decided to improve the design later on).
