@@ -50,7 +50,7 @@ block content
                 img.user-icon.user-icon-before-text.me-3(src=msg.icon)
               = msg.author
           .clearfix
-          .messages-text= msg.text
+          .messages-text= helpers.convertEmojis(msg.text)
           if msg.deleted
             small.float-end| 撤回済み
     .row
