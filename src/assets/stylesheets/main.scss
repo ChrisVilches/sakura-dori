@@ -2,7 +2,7 @@ body {
   padding: 10px 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+/*
 a {
   color: #366F8B;
   text-decoration: none;
@@ -10,6 +10,10 @@ a {
 
 a:hover{
   color: #6592A8;
+}*/
+
+a {
+  text-decoration: none;
 }
 
 .top-logo {
@@ -19,11 +23,15 @@ a:hover{
 }
 
 .top-logo a, .top-logo a:hover {
-  color:black;
+  /*color:black;*/
+}
+
+.btn {
+  transition: 0.8s;
 }
 
 .alert-expired{
-  background-color: #dedede;
+  background-color: #111;
 }
 
 .message-container{
@@ -73,18 +81,6 @@ h3 {
 
 .visibility-hidden{
   visibility: hidden;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td, th {
-  border: 1px solid black;
-  vertical-align: middle;
-  min-width: 50px;
-  padding: 2px;
 }
 
 .messages-text {

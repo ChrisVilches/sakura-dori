@@ -7,7 +7,6 @@ $(document).ready(() => {
   const $forms = $('form[enable-daterangepicker]');
 
   const onRangeChange = ($form, start, end) => {
-    console.log("changing", start, end)
     $form.find('[name="dateFrom"]').val(start.format(DATE_FORMAT));
     $form.find('[name="dateTo"]').val(end.format(DATE_FORMAT));
   };
