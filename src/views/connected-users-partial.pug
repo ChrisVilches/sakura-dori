@@ -1,8 +1,9 @@
 .mb-4.mt-4
   .mt-2.d-inline-block
     if recentUsers.length > 0
-      i.fa.fa-user.me-2
-      |最近チャットやってるユーザー（#{recentUsers.length}人）
+      .mb-2.d-inline-block.me-2
+        i.fa.fa-user.me-2
+        |最近チャットやってるユーザー（#{recentUsers.length}人）
       button.btn.btn-secondary(type="button" data-bs-toggle="modal" data-bs-target="#userListModal")
         |もっと見る
         i.fa.fa-plus.ms-1

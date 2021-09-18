@@ -40,7 +40,7 @@ block content
       .row.message-container.mb-4(class=(msg.deleted ? 'message-deleted' : '')
         data-timestamp=helpers.formatDateDetail(msg.timestamp) data-created-at=helpers.formatDateDetail(msg.createdAt))
         .col-md-12
-          small.float-end
+          .message-detail-info.float-end
             div(title=msg.ytId)
               = helpers.formatDate(msg.createdAt)
             a(href=helpers.youtubeLink(msg.chatId) data-bs-toggle='tooltip' data-bs-placement='left' title=chats.find(c => c.chatId == msg.chatId).title)

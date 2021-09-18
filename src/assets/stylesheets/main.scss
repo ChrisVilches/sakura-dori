@@ -85,6 +85,17 @@ h3 {
 
 .messages-text {
   word-break: break-word;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .15)!important;
+  padding: 10px;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+}
+
+.message-detail-info{
+  font-size: 0.8em;
+  opacity: 0.55;
 }
 
 .footer {
@@ -124,4 +135,8 @@ h3 {
 
 .donate-text {
   display: inline-block;
+}
+
+.object-fit-cover {
+  object-fit: cover;
 }

@@ -38,16 +38,16 @@ block content
 
   each chat in chats
     .chat-item
-      div
-        a(href=helpers.youtubeLink(chat.chatId), target='_blank')
-          .me-3.chat-item-image-container
-            if chat.imageUrl != null
-              img(src=chat.imageUrl alt='')
-          span.align-middle
+      .d-flex.flex-row
+        div
+          a(href=helpers.youtubeLink(chat.chatId), target='_blank')
+            .me-3.chat-item-image-container
+              if chat.imageUrl != null
+                img.object-fit-cover(src=chat.imageUrl alt='')
+        div
+          a(href=helpers.youtubeLink(chat.chatId), target='_blank')
             = chat.title
-
-          // TODO: Fix this layout.
-
-          a(href=`?chatId=${chat.chatId}`, target='_blank')
-            = helpers.numberFormat(chat.messageCount)
-            |件数
+          p
+            a(href=`?chatId=${chat.chatId}`, target='_blank')
+              = helpers.numberFormat(chat.messageCount)
+              |件数
