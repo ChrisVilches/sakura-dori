@@ -1,10 +1,10 @@
 .mb-4.mt-4
-  .mt-2.d-inline-block
+  .mt-2.d-flex.flex-row.align-items-center.align-items-center
     if recentUsers.length > 0
-      .mb-2.d-inline-block.me-2
+      .d-inline-block.me-2.flex-grow-1
         i.fa.fa-user.me-2
-        |最近チャットやってるユーザー（#{recentUsers.length}人）
-      button.btn.btn-secondary(type='button' data-bs-toggle='modal' data-bs-target='#userListModal')
+        |最近参加しているユーザー（#{recentUsers.length}人）
+      button.btn.btn-secondary.pull-right(type='button' data-bs-toggle='modal' data-bs-target='#userListModal')
         |もっと見る
         i.fa.fa-plus.ms-1
     else
