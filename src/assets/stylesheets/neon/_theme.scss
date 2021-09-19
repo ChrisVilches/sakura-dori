@@ -1,4 +1,4 @@
-// Vapor 5.1.1
+// Vapor 5.1.1 (MODIFIED)
 // Bootswatch
 
 
@@ -20,11 +20,11 @@ $outrun: false !default;
 }
 
 @mixin box-shadow($color) {
-  box-shadow: 0 0 2px rgba($color, .9), 0 0 4px rgba($color, .4), 0 0 1rem rgba($color, .3), 0 0 4rem rgba($color, .1);
+  box-shadow: 0 0 1.5px rgba($color, .9), 0 0 2.5px rgba($color, .4), 0 0 0.5rem rgba($color, .3), 0 0 2.5rem rgba($color, .1);
 }
 
 @mixin box-shadow-lg($color) {
-  box-shadow: 0 0 2rem rgba(tint-color($color, 10%), .4), 0 0 8rem rgba(tint-color($color, 10%), .3);
+  box-shadow: 0 0 1rem rgba(tint-color($color, 10%), .4), 0 0 1.5rem rgba(tint-color($color, 10%), .3);
 }
 
 @mixin header-shadow($color) {
@@ -47,7 +47,7 @@ $outrun: false !default;
 // Body
 
 body {
-  background-image: linear-gradient(shade-color($body-bg, 10%) 0%, $body-bg 7%, $body-bg 80%, shade-color(#173e98, 50%) 100%);
+  background-image: linear-gradient(shade-color($body-bg, 10%) 0%, $body-bg 7%, $body-bg 80%, shade-color($body-bg-bottom-gradient-color, 50%) 100%);
   @include text-shadow-sm($body-color);
 
   @if ($outrun) {

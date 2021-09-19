@@ -1,7 +1,7 @@
 /* I think only this import order works. */
 
 @import "@node_modules/bootstrap/scss/functions";
-@import './_variables.scss';
+@import './neon/_variables.scss';
 @import "@node_modules/bootstrap/scss/variables";
-@import './_theme.scss';
+@import './neon/_theme.scss';
 @import "@node_modules/bootstrap/scss/bootstrap";
