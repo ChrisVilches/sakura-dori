@@ -20,7 +20,9 @@ block content
       h3 オンラインユーザー取得方法
       p
         |#{helpers.secToMin(activeUsers.withinSeconds)}分前オンラインだったユーザーを含む
+        br
         |(#{activeUsers.intervalSeconds}秒おきに更新)。
+        br
         |現在#{activeUsers.userCount}人がオンラインです。
     .col-md-3.col-sm-6.mb-2.report-item-container
       i.fa.fa-server.mb-4
