@@ -8,13 +8,14 @@ const DIST_FOLDER = path.resolve(__dirname, '../dist');
 
 module.exports = {
   name: appName,
-  entry: [
-    path.join(ASSETS_FOLDER, './app.js'),
-    path.join(ASSETS_FOLDER, './styles.scss')
-  ],
+  entry: {
+    app: [path.join(ASSETS_FOLDER, './app.js'), path.join(ASSETS_FOLDER, './app.scss')],
+    // Sadly creates a useless theme.js, but at least in production it's empty.
+    theme: path.join(ASSETS_FOLDER, './stylesheets/theme.scss')
+  },
   output: {
     path: DIST_FOLDER,
-    filename: 'bundle.js',
+    filename: '[name].js',
     clean: true
   },
   resolve: {
@@ -28,15 +29,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(scss)$/i,
+        test: /\.scss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(css)$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      },
-      {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -58,6 +55,8 @@ module.exports = {
         }
       ]
     }),
-    new MiniCssExtractPlugin({ filename: 'style.css' })
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
+    })
   ]
 };

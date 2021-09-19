@@ -10,7 +10,7 @@
     "webpack:production": "webpack --config webpack/prod.config.js"
   },
   "dependencies": {
-    "bootswatch": "^5.1.1",
+    "bootstrap": "^5.1.1",
     "camelcase-keys": "^6.2.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
