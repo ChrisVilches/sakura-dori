@@ -2,7 +2,7 @@
 
 Frontend for viewing data scraped by [Youtube Chat Logger](https://github.com/ChrisVilches/youtube-chat-logger).
 
-See a [live demo](http://cloud.chrisvilches.com/live_demos/sakura-dori/).
+See a [live demo](http://cloud.chrisvilches.com/sakura-dori/).
 
 ## Execution
 
