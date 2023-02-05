@@ -1,10 +1,10 @@
-const moment = require('moment');
+const moment = require('moment')
 
 module.exports = {
   limitDateFrom: (req, res, next) => {
-    const daysAgo = Number(process.env.LIMIT_DATE_FROM_DAYS_AGO);
-    if (typeof daysAgo != 'number' || !(daysAgo > 0)) {
-      throw new Error(`Env variable LIMIT_DATE_FROM_DAYS_AGO is not set correctly. Value is ${process.env.LIMIT_DATE_FROM_DAYS_AGO}.`);
+    const daysAgo = Number(process.env.LIMIT_DATE_FROM_DAYS_AGO)
+    if (typeof daysAgo !== 'number' || !(daysAgo > 0)) {
+      throw new Error(`Env variable LIMIT_DATE_FROM_DAYS_AGO is not set correctly. Value is ${process.env.LIMIT_DATE_FROM_DAYS_AGO}.`)
     }
 
     /**
@@ -14,8 +14,8 @@ module.exports = {
      *       it either.
      */
 
-    let date = moment().subtract(daysAgo, 'days');
-    req.query.dateFrom = date.format('YYYY-MM-DD');
+    const date = moment().subtract(daysAgo, 'days')
+    req.query.dateFrom = date.format('YYYY-MM-DD')
 
     /*
     // TODO: Either this, or the frontend is bugged. Limit doesn't work
@@ -31,6 +31,6 @@ module.exports = {
     res.locals.limitDateFrom = date;
     */
 
-    next();
+    next()
   }
 }

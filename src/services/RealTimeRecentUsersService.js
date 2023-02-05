@@ -1,8 +1,8 @@
-const { Message } = require('../dbconnection');
-const { Op } = require('sequelize');
-const moment = require('moment');
-const R = require('ramda');
-const cron = require('node-cron');
+const { Message } = require('../dbconnection')
+const { Op } = require('sequelize')
+const moment = require('moment')
+const R = require('ramda')
+const cron = require('node-cron')
 
 /**
  * Periodically gets the active users in each chat (and globally in all chats),
@@ -22,59 +22,59 @@ const cron = require('node-cron');
 */
 
 class RealTimeRecentUsersService {
-  constructor(withinSeconds, intervalSeconds) {
+  constructor (withinSeconds, intervalSeconds) {
     if (!withinSeconds) {
-      throw new Error('Specify period of user activity.');
+      throw new Error('Specify period of user activity.')
     }
     if (!intervalSeconds) {
-      throw new Error('Specify periodicity (seconds).');
+      throw new Error('Specify periodicity (seconds).')
     }
-    this.withinSeconds = withinSeconds;
-    this.intervalSeconds = intervalSeconds;
-    this.cronTask = null;
-    this.preResult = {};
-    this.result = {};
-    this.resultAllChats = [];
-    this.icons = {};
-    this.lastFetchedMessageId = null;
+    this.withinSeconds = withinSeconds
+    this.intervalSeconds = intervalSeconds
+    this.cronTask = null
+    this.preResult = {}
+    this.result = {}
+    this.resultAllChats = []
+    this.icons = {}
+    this.lastFetchedMessageId = null
 
-    this.initializeStoppedCronTask();
+    this.initializeStoppedCronTask()
   }
 
   // Initialize but don't begin execution.
   initializeStoppedCronTask = () => {
-    const cronString = `*/${this.intervalSeconds} * * * * *`;
+    const cronString = `*/${this.intervalSeconds} * * * * *`
     if (!cron.validate(cronString)) {
-      throw new Error(`Cron string "${cronString}" is not valid.`);
+      throw new Error(`Cron string "${cronString}" is not valid.`)
     }
 
-    this.cronTask = cron.schedule(cronString, this.#periodicJob, { scheduled: false });
+    this.cronTask = cron.schedule(cronString, this.#periodicJob, { scheduled: false })
   }
 
-  start() {
-    if (!this.cronTask) return;
-    this.cronTask.start();
+  start () {
+    if (!this.cronTask) return
+    this.cronTask.start()
   }
 
-  stop() {
-    if (!this.cronTask) return;
-    this.cronTask.stop();
+  stop () {
+    if (!this.cronTask) return
+    this.cronTask.stop()
   }
 
   getRecentUsers = chatId => {
-    if (typeof chatId == 'string' && chatId.length > 0) return this.result[chatId] || [];
-    return this.resultAllChats || [];
+    if (typeof chatId === 'string' && chatId.length > 0) return this.result[chatId] || []
+    return this.resultAllChats || []
   }
 
   #cleanOldMessages = () => {
-    const isRecent = date => moment().diff(date, 'seconds') <= this.withinSeconds;
+    const isRecent = date => moment().diff(date, 'seconds') <= this.withinSeconds
 
     Object.entries(this.preResult).forEach(([_chat, authors]) => {
       Object.keys(authors).forEach(author => {
-        authors[author] = authors[author].filter(isRecent);
-        if (authors[author].length == 0) delete authors[author];
-      });
-    });
+        authors[author] = authors[author].filter(isRecent)
+        if (authors[author].length === 0) delete authors[author]
+      })
+    })
   }
 
   // Converts a map with the format author -> Date Array to an array with
@@ -85,55 +85,55 @@ class RealTimeRecentUsersService {
       messageDates: dates.sort((a, b) => b - a),
       count: dates.length,
       icon: this.icons[author]
-    })).sort(this.#sortByDateArray);
+    })).sort(this.#sortByDateArray)
   }
 
   #sortByDateArray = (a, b) => {
-    a = a.messageDates;
-    b = b.messageDates;
-    if (a.length != b.length) return b.length - a.length;
+    a = a.messageDates
+    b = b.messageDates
+    if (a.length !== b.length) return b.length - a.length
     for (let i = 0; i < a.length; i++) {
-      const dateA = a[i];
-      const dateB = b[i];
-      if (dateA != dateB) return dateB - dateA;
+      const dateA = a[i]
+      const dateB = b[i]
+      if (dateA !== dateB) return dateB - dateA
     }
-    return 0;
+    return 0
   }
 
   #generateReadyResult = () => {
-    this.result = {};
+    this.result = {}
     Object.entries(this.preResult).forEach(([chat, authors]) => {
       // Convert from map to list.
-      this.result[chat] = this.#authorDateMapToArray(authors);
-    });
+      this.result[chat] = this.#authorDateMapToArray(authors)
+    })
   }
 
   #generateReadyResultAllChats = () => {
-    const authorDates = {};
+    const authorDates = {}
 
     // Concat all dates in a new map (author -> Date Array).
     Object.entries(this.preResult).forEach(([_chat, authors]) => {
       Object.entries(authors).forEach(([author, dates]) => {
-        authorDates[author] = (authorDates[author] || []).concat(dates);
-      });
-    });
+        authorDates[author] = (authorDates[author] || []).concat(dates)
+      })
+    })
 
-    this.resultAllChats = this.#authorDateMapToArray(authorDates);
+    this.resultAllChats = this.#authorDateMapToArray(authorDates)
   }
 
   #periodicJob = async () => {
-    const newMessages = await this.#fetchNewMessages();
+    const newMessages = await this.#fetchNewMessages()
     newMessages.forEach(msg => {
       // Store one icon for each name. It doesn't detect repeated users.
-      this.icons[msg.author] = msg.icon;
-      this.preResult[msg.chatId] = this.preResult[msg.chatId] || {};
-      this.preResult[msg.chatId][msg.author] = this.preResult[msg.chatId][msg.author] || [];
-      this.preResult[msg.chatId][msg.author].push(msg.createdAt);
-    });
+      this.icons[msg.author] = msg.icon
+      this.preResult[msg.chatId] = this.preResult[msg.chatId] || {}
+      this.preResult[msg.chatId][msg.author] = this.preResult[msg.chatId][msg.author] || []
+      this.preResult[msg.chatId][msg.author].push(msg.createdAt)
+    })
 
-    this.#cleanOldMessages();
-    this.#generateReadyResult();
-    this.#generateReadyResultAllChats();
+    this.#cleanOldMessages()
+    this.#generateReadyResult()
+    this.#generateReadyResultAllChats()
   }
 
   #fetchNewMessages = async () => {
@@ -141,29 +141,29 @@ class RealTimeRecentUsersService {
       where: this.#fetchCondition(),
       order: [['id', 'DESC']],
       raw: true
-    });
+    })
 
-    this.#saveLatestId(messages);
+    this.#saveLatestId(messages)
 
-    return messages;
+    return messages
   }
 
   #saveLatestId = messages => {
-    if (messages.length == 0) return;
+    if (messages.length === 0) return
     this.lastFetchedMessageId = R.compose(
       R.apply(Math.max),
       R.pluck('id')
-    )(messages);
+    )(messages)
   }
 
   #fetchCondition = () => {
     if (this.lastFetchedMessageId) {
-      return { id: { [Op.gt]: this.lastFetchedMessageId } };
+      return { id: { [Op.gt]: this.lastFetchedMessageId } }
     } else {
-      let dateFrom = moment().subtract(this.withinSeconds, 'seconds');
-      return { createdAt: { [Op.gte]: dateFrom } };
+      const dateFrom = moment().subtract(this.withinSeconds, 'seconds')
+      return { createdAt: { [Op.gte]: dateFrom } }
     }
   }
 }
 
-module.exports = RealTimeRecentUsersService;
+module.exports = RealTimeRecentUsersService

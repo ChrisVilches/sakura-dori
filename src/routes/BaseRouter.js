@@ -1,14 +1,15 @@
-const express = require('express');
+const express = require('express')
 
 class BaseRouter {
-  static create(){
-    const router = express.Router();
-    this.applyMiddlewares(router);
-    return router;
+  static create () {
+    const router = express.Router()
+    this.applyMiddlewares(router)
+    return router
   }
-  static applyMiddlewares(_router){
-    throw new Error('Not implemented');
+
+  static applyMiddlewares (_router) {
+    throw new Error('Not implemented')
   }
 }
 
-module.exports = BaseRouter;
+module.exports = BaseRouter

@@ -7,10 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     imageUrl: DataTypes.STRING,
     messageCount: DataTypes.INTEGER
   }, {
-    underscored: true,
+    underscored: true
     // Note: Indexes are for now just added directly to the database
     //       without using any migration manager tool.
-  });
+  })
 
-  return Chat;
+  return Chat
 }

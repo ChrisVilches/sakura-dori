@@ -1,4 +1,4 @@
-const requireEnv = require('require-environment-variables');
+const requireEnv = require('require-environment-variables')
 
 const requireEnvVariables = () => {
   requireEnv([
@@ -11,20 +11,20 @@ const requireEnvVariables = () => {
     'LIMIT_DATE_FROM_DAYS_AGO',
     'BASIC_AUTH_USERNAME',
     'BASIC_AUTH_PASSWORD'
-  ]);
+  ])
 }
 
 module.exports = {
   config: () => {
-    require('dotenv').config();
-    requireEnvVariables();
-    const moment = require('moment-timezone');
-    const setTZ = require('set-tz');
-    const TIMEZONE = 'Asia/Tokyo';
-    const LOCALE = 'ja';
+    require('dotenv').config()
+    requireEnvVariables()
+    const moment = require('moment-timezone')
+    const setTZ = require('set-tz')
+    const TIMEZONE = 'Asia/Tokyo'
+    const LOCALE = 'ja'
 
-    setTZ(TIMEZONE);
-    moment.locale(LOCALE);
-    moment.tz.setDefault(TIMEZONE);
+    setTZ(TIMEZONE)
+    moment.locale(LOCALE)
+    moment.tz.setDefault(TIMEZONE)
   }
-};
+}

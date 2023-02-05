@@ -1,4 +1,4 @@
-const sequelizePaginate = require('sequelize-paginate');
+const sequelizePaginate = require('sequelize-paginate')
 
 // TODO: Add restriction so that values cannot be null.
 
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     ytId: DataTypes.STRING,
     icon: DataTypes.STRING
   }, {
-    underscored: true,
+    underscored: true
     // Note: Indexes are for now just added directly to the database
     //       without using any migration manager tool.
-  });
+  })
 
-  sequelizePaginate.paginate(Message);
-  return Message;
+  sequelizePaginate.paginate(Message)
+  return Message
 }

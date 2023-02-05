@@ -1,22 +1,20 @@
-const BaseRouter = require('./BaseRouter');
-const express = require('express');
-const app = express();
-const { setBaseUrl, setHtmlTitle, setCurrentPath, basicAuth, analytics } = require('../middlewares/htmlMiddleware');
+const BaseRouter = require('./BaseRouter')
+const { setBaseUrl, setHtmlTitle, setCurrentPath, analytics } = require('../middlewares/htmlMiddleware')
 
 class HtmlRouter extends BaseRouter {
-  static applyMiddlewares(router) {
+  static applyMiddlewares (router) {
     // Pass Google Analytics key.
-    router.use(analytics);
+    router.use(analytics)
 
     // Set global title to be shown in HTML pages.
-    router.use(setHtmlTitle);
+    router.use(setHtmlTitle)
 
     // To be able to highlight the current page in HTML.
-    router.use(setCurrentPath);
+    router.use(setCurrentPath)
 
     // Set base URL to be used inside <base>.
-    router.use(setBaseUrl);
+    router.use(setBaseUrl)
   }
 }
 
-module.exports = HtmlRouter;
+module.exports = HtmlRouter
