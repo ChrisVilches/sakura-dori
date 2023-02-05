@@ -47,7 +47,7 @@ block content
           a(href=helpers.youtubeLink(chat.chatId), target='_blank')
             .me-3.chat-item-image-container
               if chat.imageUrl !== null
-                img.object-fit-cover(src=chat.imageUrl, alt='')
+                img.object-fit-cover(src=chat.imageUrl, alt=chat.title)
 
         .flex-grow-1.pe-4
           a(href=helpers.youtubeLink(chat.chatId), target='_blank')
