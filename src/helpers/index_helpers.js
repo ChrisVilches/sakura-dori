@@ -1,6 +1,13 @@
 const EmojiSet = require('emoji-set');
 const R = require('ramda');
 const moment = require('moment-timezone');
+const fs = require('fs');
+
+const YOUTUBE_ICONS = new Set(
+  fs.readdirSync("./src/assets/images/youtube-icons")
+    .filter(file => file.endsWith('.png'))
+    .map(file => file.replace(/\.png$/, ''))
+);
 
 // Map emojicode -> emoji,
 // e.g. tomato -> 🍅
@@ -45,10 +52,30 @@ const youtubeLink = chatId => `https://www.youtube.com/watch?v=${chatId}`;
 
 const formatCommit = R.take(7);
 
-const EMOJI_REGEX = new RegExp(':([a-z_]+):', 'g');
+const EMOJI_REGEX_SINGLE = /^(:[a-z_-]+:)$/;
+const COLON_REGEX = /:/g;
 
-const convertEmojis = text => {
-  return text.replace(EMOJI_REGEX, (match, capture) => EMOJI_CONVERSION[capture] || match);
+const isEmoji = text => Boolean(text.match(EMOJI_REGEX_SINGLE));
+
+const textSplitEmojis = text => text.split(/(:[a-z_-]+:)/g);
+
+const removeColons = icon => icon.replace(COLON_REGEX, '');
+
+const isYoutubeIcon = icon => YOUTUBE_ICONS.has(icon);
+
+const toEmoji = iconName => {
+  const result = EMOJI_CONVERSION[iconName];
+  if (!result) {
+    // TODO: This is mostly to monitor the emoji upgrade, since the code may not be
+    //       stable at first. Remove this comment in the future.
+    //       There could be some rare cases where the icons in a message are not parsed correctly,
+    //       so be sure to monitor it a bit.
+    //       I think the best way to unit test this would be to make the split function return a list of
+    //       structs that have an enum flag (3 options: normal text, normal emoji, youtube icon),
+    //       that way it's easier to write the template code (pug) and also to unit test.
+    console.error(`Attempted to convert emoji ${iconName} but it wasn't found`);
+  }
+  return result;
 }
 
 const translateEnvironment = env => {
@@ -69,5 +96,9 @@ module.exports = {
   isOlderThanDays,
   secToMin,
   translateEnvironment,
-  convertEmojis
+  toEmoji,
+  textSplitEmojis,
+  isEmoji,
+  isYoutubeIcon,
+  removeColons
 };

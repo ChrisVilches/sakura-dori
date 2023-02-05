@@ -50,7 +50,17 @@ block content
                 img.user-icon.user-icon-before-text.me-3(src=msg.icon)
               = msg.author
           .clearfix
-          .messages-text= helpers.convertEmojis(msg.text)
+          .messages-text
+            each part in helpers.textSplitEmojis(msg.text)
+              if helpers.isEmoji(part)
+                - const iconName = helpers.removeColons(part)
+
+                if helpers.isYoutubeIcon(iconName)
+                  img.youtube-icon(src=`images/youtube-icons/${iconName}.png` alt=iconName)
+                else
+                  = helpers.toEmoji(iconName) || `:${iconName}:`
+              else
+                = part
           if msg.deleted
             .clearfix.mt-2
             small.float-end| 撤回済み

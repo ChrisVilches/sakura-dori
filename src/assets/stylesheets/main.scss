@@ -134,3 +134,11 @@ h3 {
 .object-fit-cover {
   object-fit: cover;
 }
+
+/* TODO: There should be a file for variables like this one */
+$youtube-icon-size: 20px;
+
+.youtube-icon {
+  width: $youtube-icon-size;
+  height: $youtube-icon-size;
+}
