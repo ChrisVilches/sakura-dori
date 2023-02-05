@@ -7,7 +7,7 @@ console.log(`Connecting to Postgres in: ${process.env.DATABASE_URL}`);
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
     ssl: {
-      require: true,
+      require: process.env.DATABASE_REQUIRE_SSL === '1',
       rejectUnauthorized: false
     }
   }
