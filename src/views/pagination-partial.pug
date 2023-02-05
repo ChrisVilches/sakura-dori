@@ -1,13 +1,13 @@
 .pagination-container.d-flex.justify-content-between
   .align-self-center
-    a.btn.btn-secondary(class=`${query.page == 1 ? 'visibility-hidden' : ''}` href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)
+    a.btn.btn-secondary(class=`${query.page == 1 ? 'visibility-hidden' : ''}`, href=`?${helpers.toQueryString(query, { page: +query.page - 1 })}`)
       .fa.fa-arrow-left
 
   .align-self-center.text-center
     = `ページ ${query.page}/${pages}`
     br
-    =`${helpers.numberFormat(total)}件数`
+    = `${helpers.numberFormat(total)}件数`
 
   .align-self-center
-    a.btn.btn-secondary(class=`${query.page == pages ? 'visibility-hidden' : ''}` href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)
+    a.btn.btn-secondary(class=`${query.page == pages ? 'visibility-hidden' : ''}`, href=`?${helpers.toQueryString(query, { page: +query.page + 1 })}`)
       .fa.fa-arrow-right

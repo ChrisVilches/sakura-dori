@@ -1,4 +1,4 @@
-extends layout
+extends layout.pug
 
 block variables
   - subtitle = 'システムの状態'
@@ -46,13 +46,13 @@ block content
         div
           a(href=helpers.youtubeLink(chat.chatId), target='_blank')
             .me-3.chat-item-image-container
-              if chat.imageUrl != null
-                img.object-fit-cover(src=chat.imageUrl alt='')
+              if chat.imageUrl !== null
+                img.object-fit-cover(src=chat.imageUrl, alt='')
 
-        div.flex-grow-1.pe-4
+        .flex-grow-1.pe-4
           a(href=helpers.youtubeLink(chat.chatId), target='_blank')
             = chat.title
-        .text-end.flex-grow-2.text-nowrap(data-bs-toggle='tooltip' data-bs-placement='left' title='メッセージを表示する')
+        .text-end.flex-grow-2.text-nowrap(data-bs-toggle='tooltip', data-bs-placement='left', title='メッセージを表示する')
           a(href=`?chatId=${chat.chatId}`, target='_blank')
             = helpers.numberFormat(chat.messageCount)
             |件数

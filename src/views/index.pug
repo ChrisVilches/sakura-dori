@@ -1,7 +1,7 @@
-extends layout
+extends layout.pug
 
 block content
-  form#message-search-form.mb-2(action='' method='GET' enable-daterangepicker=true)
+  form.mb-2(id='message-search-form', action='', method='GET', enable-daterangepicker=true)
     .row
       //-.col-md-6.input-field
         input.form-control(role='daterangepicker', placeholder='日付', data-limit-date-from=limitDateFrom)
@@ -17,10 +17,10 @@ block content
 
       .clearfix
       .col-md-6.input-field
-        input.form-control(name='author', placeholder='ユーザー名で絞り込み', value=query.author)
+        input.form-control(type='text', name='author', placeholder='ユーザー名で絞り込み', value=query.author)
 
       .col-md-6.input-field
-        input.form-control(name='text', placeholder='メッセージの内容で絞り込み', value=query.text)
+        input.form-control(type='text', name='text', placeholder='メッセージの内容で絞り込み', value=query.text)
 
       .input-field.d-grid.gap-2.d-md-block
         button.btn.btn-primary(type='submit')
@@ -28,27 +28,27 @@ block content
 
   if recentUsers.length > 0
     .mb-2
-      include connected-users-partial
+      include connected-users-partial.pug
 
-  include stream-ended-notice-partial
+  include stream-ended-notice-partial.pug
 
   if pages > 0
     .row
-      include pagination-partial
+      include pagination-partial.pug
 
     each msg in messages
       .row.message-container(class=(msg.deleted ? 'message-deleted' : '')
-        data-timestamp=helpers.formatDateDetail(msg.timestamp) data-created-at=helpers.formatDateDetail(msg.createdAt))
+        data-timestamp=helpers.formatDateDetail(msg.timestamp), data-created-at=helpers.formatDateDetail(msg.createdAt))
         .col-md-12
           .message-detail-info.float-end
             div(title=msg.ytId)
               = helpers.formatDate(msg.createdAt)
-            a(href=helpers.youtubeLink(msg.chatId) data-bs-toggle='tooltip' data-bs-placement='left' title=chats.find(c => c.chatId == msg.chatId).title)
+            a(href=helpers.youtubeLink(msg.chatId), data-bs-toggle='tooltip', data-bs-placement='left', title=chats.find(c => c.chatId == msg.chatId).title)
               = msg.chatId
           .mb-2
-              .d-inline
-                img.user-icon.user-icon-before-text.me-3(src=msg.icon)
-              = msg.author
+            .d-inline
+              img.user-icon.user-icon-before-text.me-3(src=msg.icon, alt=msg.author)
+            = msg.author
           .clearfix
           .messages-text
             each part in helpers.textSplitEmojis(msg.text)
@@ -56,7 +56,7 @@ block content
                 - const iconName = helpers.removeColons(part)
 
                 if helpers.isYoutubeIcon(iconName)
-                  img.youtube-icon(src=`images/youtube-icons/${iconName}.png` alt=iconName)
+                  img.youtube-icon(src=`images/youtube-icons/${iconName}.png`, alt=iconName)
                 else
                   = helpers.toEmoji(iconName) || `:${iconName}:`
               else
@@ -65,6 +65,6 @@ block content
             .clearfix.mt-2
             small.float-end| 撤回済み
     .row
-      include pagination-partial
+      include pagination-partial.pug
   else
     .alert.alert-warning| 結果がありませんでした。

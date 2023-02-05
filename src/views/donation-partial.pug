@@ -1,6 +1,6 @@
 //- Small screen
 .d-block.d-sm-none.float-end
-  button.btn.btn-primary(type="button" data-bs-toggle="modal" data-bs-target="#donateModal")
+  button.btn.btn-primary(type='button', data-bs-toggle='modal', data-bs-target='#donateModal')
     |寄付する
 
 //- Big screen
@@ -10,19 +10,19 @@
       .donate-text
         | サイトのホスティングとデータベースの費用は月2000円かかるので、寄付をお願いします！
     .col-md-3.col-sm-4.d-grid.gap-2.d-md-block
-      button.pull-right.btn.btn-primary(type="button" data-bs-toggle="modal" data-bs-target="#donateModal")
+      button.pull-right.btn.btn-primary(type='button', data-bs-toggle='modal', data-bs-target='#donateModal')
         |寄付する
 
-#donateModal.modal.fade(tabindex="-1" aria-labelledby="donateModalLabel" aria-hidden="true")
+.modal.fade(id='donateModal', tabindex='-1', aria-labelledby='donateModalLabel', aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
-        h5.modal-title#donateModalLabel
+        h5.modal-title(id='donateModalLabel')
           |寄付（PayPay）
-        button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+        button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
 
       .modal-body
-        img.img-fluid(src="images/paypay.webp")
+        img.img-fluid(src='images/paypay.webp', alt='PayPay')
       .modal-footer
-        button.btn.btn-secondary(type="button" data-bs-dismiss="modal")
+        button.btn.btn-secondary(type='button', data-bs-dismiss='modal')
           |閉じる
