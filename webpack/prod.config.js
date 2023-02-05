@@ -1,7 +1,7 @@
-const baseConfig = require('./base.config');
-const { merge } = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const baseConfig = require('./base.config')
+const { merge } = require('webpack-merge')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 module.exports = merge(baseConfig, {
@@ -16,18 +16,18 @@ module.exports = merge(baseConfig, {
           compress: {
             pure_getters: true,
             unsafe: true,
-            unsafe_comps: true,
+            unsafe_comps: true
           },
           output: {
-            comments: false,
-          },
+            comments: false
+          }
         },
         exclude: [/\.min\.js$/gi]
       })
     ]
   },
   plugins: [
-    /*new ImageMinimizerPlugin({
+    /* new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
           ['gifsicle', { interlaced: true }],
@@ -35,6 +35,6 @@ module.exports = merge(baseConfig, {
           ['optipng', { optimizationLevel: 5 }]
         ]
       }
-    })*/
+    }) */
   ]
-});
+})

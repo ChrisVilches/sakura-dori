@@ -7,7 +7,9 @@
     "start": "node ./bin/www",
     "dev": "concurrently --kill-others \"nodemon --exec NODE_ENV=development npm start\" \"npm run webpack:development\"",
     "webpack:development": "webpack --config webpack/dev.config.js",
-    "webpack:production": "webpack --config webpack/prod.config.js"
+    "webpack:production": "webpack --config webpack/prod.config.js",
+    "format:js": "standard --fix",
+    "format:pug": "pug-lint src/views/"
   },
   "dependencies": {
     "bootstrap": "^5.1.1",
@@ -49,13 +51,19 @@
     "imagemin-jpegtran": "^7.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "nodemon": "^2.0.12",
+    "pug-lint": "^2.6.0",
+    "pug-lint-config-clock": "^2.0.0",
     "sass": "^1.41.1",
     "sass-loader": "^12.1.0",
+    "standard": "^17.0.0",
     "style-loader": "^3.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.53.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1",
     "webpack-merge": "^5.8.0"
+  },
+  "pugLintConfig": {
+    "extends": "clock"
   }
 }

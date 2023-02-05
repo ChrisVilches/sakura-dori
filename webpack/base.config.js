@@ -1,10 +1,10 @@
-var appName = require('../package.json').name;
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const appName = require('../package.json').name
+const path = require('path')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const ASSETS_FOLDER = path.resolve(__dirname, '../src', 'assets');
-const DIST_FOLDER = path.resolve(__dirname, '../dist');
+const ASSETS_FOLDER = path.resolve(__dirname, '../src', 'assets')
+const DIST_FOLDER = path.resolve(__dirname, '../dist')
 
 module.exports = {
   name: appName,
@@ -30,7 +30,7 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.js$/,
@@ -56,7 +56,7 @@ module.exports = {
       ]
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css"
+      filename: '[name].css'
     })
   ]
-};
+}
