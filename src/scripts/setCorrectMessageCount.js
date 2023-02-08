@@ -10,8 +10,8 @@ async function setCorrectMessageCount () {
   const chatsService = new ChatsService()
   const allChats = await chatsService.fetchAllChats()
 
-  for (let i = 0; i < allChats.length; i++) {
-    await chatsService.setCorrectMessageCount(allChats[i].chatId)
+  for (const chat of allChats) {
+    await chatsService.setCorrectMessageCount(chat.chatId)
   }
 }
 

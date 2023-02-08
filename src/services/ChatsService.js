@@ -15,6 +15,13 @@ class ChatsService {
   async setCorrectMessageCount (chatId) {
     const correctCount = await Message.count({ where: { chatId } })
     const chat = await Chat.findOne({ where: { chatId } })
+
+    if (chat.messageCount === correctCount) {
+      console.log('✅ Counts are the same')
+    } else {
+      console.log(`🔨 Updating ${chat.messageCount} -> ${correctCount}`)
+    }
+
     chat.messageCount = correctCount
     await chat.save()
   }
