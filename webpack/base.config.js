@@ -52,7 +52,11 @@ module.exports = {
         {
           from: path.join(ASSETS_FOLDER, './images'),
           to: path.join(DIST_FOLDER, './images')
-        }
+        },
+	{
+	  from: path.join(ASSETS_FOLDER, './favicon.svg'),
+	  to: path.join(DIST_FOLDER, './favicon.svg')
+	}
       ]
     }),
     new MiniCssExtractPlugin({
