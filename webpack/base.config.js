@@ -54,8 +54,8 @@ module.exports = {
           to: path.join(DIST_FOLDER, './images')
         },
         {
-	  from: path.join(ASSETS_FOLDER, './favicon.svg'),
-	  to: path.join(DIST_FOLDER, './favicon.svg')
+          from: path.join(ASSETS_FOLDER, './favicon.svg'),
+          to: path.join(DIST_FOLDER, './favicon.svg')
         }
       ]
     }),
