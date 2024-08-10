@@ -55,7 +55,7 @@
     "pug-lint-config-clock": "^2.0.0",
     "sass": "^1.41.1",
     "sass-loader": "^12.1.0",
-    "standard": "^17.0.0",
+    "standard": "^17.1.0",
     "style-loader": "^3.2.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.53.0",
