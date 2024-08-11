@@ -25,8 +25,6 @@ npm run build
 NODE_ENV=production npm start
 ```
 
-**Note:** If `nodemon` starts to fail, clone the repo and install again (working solution to the `Port 3000 is already in use` issue). Rebooting the computer seems to solve this issue as well.
-
 ## Tools used
 
 Made with:
@@ -37,6 +35,6 @@ Made with:
 * Bootstrap 5
 * SASS
 * PostgreSQL
-* Electron
+* Puppeteer
 
 Also, unlike most of my other projects, almost no Javascript was used in the frontend (pages are server rendered), as it was originally meant to be an old school looking website (but I decided to improve the design later on).
