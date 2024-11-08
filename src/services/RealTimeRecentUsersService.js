@@ -1,4 +1,4 @@
-const { Message } = require('../dbconnection')
+const { Message, Chat } = require('../dbconnection')
 const { Op } = require('sequelize')
 const moment = require('moment')
 const R = require('ramda')
@@ -124,7 +124,7 @@ class RealTimeRecentUsersService {
   #periodicJob = async () => {
     const newMessages = await this.#fetchNewMessages()
     newMessages.forEach(msg => {
-      const chatId = msg.chat.chatId
+      const chatId = msg['chat.chatId']
       // Store one icon for each name. It doesn't detect repeated users.
       this.icons[msg.author] = msg.icon
       this.preResult[chatId] = this.preResult[chatId] || {}
@@ -141,6 +141,7 @@ class RealTimeRecentUsersService {
     const messages = await Message.findAll({
       where: this.#fetchCondition(),
       order: [['id', 'DESC']],
+      include: Chat,
       raw: true
     })
 
