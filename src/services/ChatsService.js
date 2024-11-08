@@ -5,6 +5,12 @@ class ChatsService {
     return await Chat.findAll()
   }
 
+  async findOne (chatId) {
+    return await Chat.findOne({
+      where: { chatId }
+    })
+  }
+
   async fetchLastMessageDateForChat (chatId) {
     return await Message.findOne({
       where: { chatId },

@@ -1,5 +1,6 @@
 const { Message, Chat, sequelize } = require('../dbconnection')
 const camelcaseKeys = require('camelcase-keys')
+const ChatsService = require('./ChatsService')
 
 const IndexState = Object.freeze({ MARKED_AS_DELETED: 1, INDEXED: 2, SKIPPED: 3, ERROR: 4 })
 
@@ -15,6 +16,7 @@ class IndexMessagesService {
     for (let i = 0; i < messages.length; i++) {
       const msg = messages[i]
       msg.chatId = chatId
+      msg.channelId = (await ChatsService.findOne(chatId)).id
 
       // Add them in order (await). The reason is that the timestamp doesn't include seconds, so
       // in order to know the order of submission (in the chat), keep the order in which they are fetched.
