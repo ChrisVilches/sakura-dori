@@ -40,7 +40,7 @@ class IndexMessagesService {
           // It's difficult to know if the long string ID in the HTML tag is actually unique.
           // So just in case, I use more fields to guarantee it's a unique message.
           where: {
-            chatId: message.chatId,
+            channelId: message.channelId,
             ytId: message.id
           }
         }, { transaction: t })
@@ -65,7 +65,8 @@ class IndexMessagesService {
           author: message.author,
           text: message.text,
           deleted: message.deleted,
-          chatId: message.chatId
+          chatId: message.chatId,
+          channelId: message.channelId
         }, { transaction: t })
 
         // Increase one to message count. This can be done better with a trigger.
