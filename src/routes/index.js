@@ -44,9 +44,12 @@ const pickSearchParams = R.pick(['chatId', 'text', 'author', 'dateFrom', 'dateTo
 const setChatData = async (req, res, next) => {
   const chatsService = new ChatsService()
 
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
+
   // For showing options in the select.
   res.locals.chats = await chatsService.fetchAllChats()
   res.locals.latestChatMessage = req.query.chatId ? await chatsService.fetchLastMessageDateForChat(req.query.chatId) : null
+  res.locals.recentChats = res.locals.chats.filter(({ updatedAt }) => updatedAt > oneDayAgo)
   next()
 }
 

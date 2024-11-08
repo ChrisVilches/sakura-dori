@@ -26,6 +26,14 @@ block content
         button.btn.btn-primary(type='submit')
           i.fa.fa-search
 
+
+  if recentChats.length > 0
+    h2| おすすめ
+    each chat in recentChats
+      p
+        a(href=`?${helpers.toQueryString({ chatId: chat.chatId })}`)
+          = chat.title
+
   if recentUsers.length > 0
     .mb-2
       include connected-users-partial.pug
