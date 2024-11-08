@@ -15,8 +15,6 @@ const validateChatId = async (req, _res, next) => {
   }
 
   const chatServ = new ChatsService()
-  console.log('********************')
-  console.log(req.query)
   const chat = await chatServ.findOne(req.query.chatId)
   if (chat) {
     next()

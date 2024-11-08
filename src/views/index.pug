@@ -51,7 +51,7 @@ block content
           .message-detail-info.float-end
             div(title=msg.ytId)
               = helpers.formatDate(msg.createdAt)
-            a(href=helpers.youtubeLink(msg.chatId), data-bs-toggle='tooltip', data-bs-placement='left', title=chats.title)
+            a(href=helpers.youtubeLink(msg.chat.chatId), data-bs-toggle='tooltip', data-bs-placement='left', title=msg.chat.title)
               = msg.chat.chatId
           .mb-2
             .d-inline

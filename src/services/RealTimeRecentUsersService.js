@@ -124,11 +124,12 @@ class RealTimeRecentUsersService {
   #periodicJob = async () => {
     const newMessages = await this.#fetchNewMessages()
     newMessages.forEach(msg => {
+      const chatId = msg.chat.chatId
       // Store one icon for each name. It doesn't detect repeated users.
       this.icons[msg.author] = msg.icon
-      this.preResult[msg.chatId] = this.preResult[msg.chatId] || {}
-      this.preResult[msg.chatId][msg.author] = this.preResult[msg.chatId][msg.author] || []
-      this.preResult[msg.chatId][msg.author].push(msg.createdAt)
+      this.preResult[chatId] = this.preResult[chatId] || {}
+      this.preResult[chatId][msg.author] = this.preResult[chatId][msg.author] || []
+      this.preResult[chatId][msg.author].push(msg.createdAt)
     })
 
     this.#cleanOldMessages()
