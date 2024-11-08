@@ -7,6 +7,23 @@ const { basicAuth } = require('../middlewares/htmlMiddleware')
 const parallel = require('parallel-express-middleware')
 const R = require('ramda')
 const router = require('./HtmlRouter').create()
+const createError = require('http-errors')
+
+const validateChatId = async (req, _res, next) => {
+  if (!req.query.chatId || req.query.chatId.length === 0) {
+    return next()
+  }
+
+  const chatServ = new ChatsService()
+  console.log('********************')
+  console.log(req.query)
+  const chat = await chatServ.findOne(req.query.chatId)
+  if (chat) {
+    next()
+  } else {
+    next(createError(404, '見つかりませんでした'))
+  }
+}
 
 // In case the user puts the two dates in wrong order, fix the order,
 // and put them the correct way in the form.
@@ -69,9 +86,9 @@ const showMessagesPageShared = [
  * In /, the dateFrom value is coerced so that the date range is not too big (to make queries quicker).
  */
 
-router.get('/', reorderDates, limitDateFrom, ...showMessagesPageShared)
+router.get('/', validateChatId, reorderDates, limitDateFrom, ...showMessagesPageShared)
 
-router.get('/archive', basicAuth, reorderDates, ...showMessagesPageShared)
+router.get('/archive', validateChatId, basicAuth, reorderDates, ...showMessagesPageShared)
 
 router.get('/about', function (_req, res) {
   res.render('about')

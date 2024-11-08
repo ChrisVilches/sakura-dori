@@ -10,8 +10,9 @@ class ChatsService {
   }
 
   async fetchLastMessageDateForChat (chatId) {
+    const chat = await this.findOne(chatId)
     return await Message.findOne({
-      where: { chatId },
+      where: { channelId: chat.id },
       order: [['id', 'DESC']]
     })
   }

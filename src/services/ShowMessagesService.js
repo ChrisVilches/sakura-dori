@@ -22,7 +22,7 @@ const R = require('ramda')
 class ShowMessagesService {
   async find (params = {}) {
     params = this.#compactParams(params)
-    const where = this.#whereFilters(params)
+    const where = await this.#whereFilters(params)
 
     const query = {
       where,
@@ -55,11 +55,11 @@ class ShowMessagesService {
     return paginatedMessages
   }
 
-  #whereFilters = params => {
+  #whereFilters = async params => {
     const exactString = params.exact === 'true'
 
     return R.mergeAll([
-      this.#filterByChat(params.chatId),
+      await this.#filterByChat(params.chatId),
       this.#filterByAuthor(params.author, exactString),
       this.#filterByText(params.text, exactString),
       this.#filterByDate(params.dateFrom, params.dateTo)
