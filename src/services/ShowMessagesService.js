@@ -1,5 +1,6 @@
-const { Message } = require('../dbconnection')
+const { Message, Chat } = require('../dbconnection')
 const { Op } = require('sequelize')
+const ChatsService = require('./ChatsService')
 const ReportService = require('./ReportService')
 const R = require('ramda')
 
@@ -25,6 +26,7 @@ class ShowMessagesService {
 
     const query = {
       where,
+      include: Chat,
       order: [['createdAt', 'DESC']]
     }
 
@@ -84,8 +86,14 @@ class ShowMessagesService {
     return {}
   }
 
-  #filterByChat = chatId => {
-    if (chatId) return { chatId }
+  #filterByChat = async chatId => {
+    if (chatId) {
+      const chatServ = new ChatsService()
+      const chat = await chatServ.findOne(chatId)
+      if (chat) {
+        return { channelId: chat.id }
+      }
+    }
     return {}
   }
 

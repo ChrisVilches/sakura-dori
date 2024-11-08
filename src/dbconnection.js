@@ -18,6 +18,14 @@ const models = {
   Message: Message(sequelize, Sequelize.DataTypes)
 }
 
+// TODO: I'd like to find a way to put this association in a models folder/file
+// It seems it's not so easy to import one model from another model because they are wrapped.
+models.Message.belongsTo(models.Chat, {
+  foreignKey: {
+    name: 'channelId'
+  }
+})
+
 async function syncAllModels () {
   for (const modelName in models) {
     await models[modelName].sync()

@@ -17,17 +17,16 @@ class ChatsService {
   }
 
   async setCorrectMessageCount (chatId) {
-    const correctCount = await Message.count({ where: { chatId } })
     const chat = await Chat.findOne({ where: { chatId } })
+    const correctCount = await Message.count({ where: { channelId: chat.id } })
 
     if (chat.messageCount === correctCount) {
       console.log('✅ Counts are the same')
     } else {
       console.log(`🔨 Updating ${chat.messageCount} -> ${correctCount}`)
+      chat.messageCount = correctCount
+      await chat.save()
     }
-
-    chat.messageCount = correctCount
-    await chat.save()
   }
 
   // TODO: Optimize this. It's too slow. For now it's unused.

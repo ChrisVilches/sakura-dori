@@ -7,8 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     author: DataTypes.STRING,
     text: DataTypes.TEXT,
     deleted: DataTypes.BOOLEAN,
-    chatId: DataTypes.STRING,
-    channelId: DataTypes.NUMBER,
     timestamp: DataTypes.DATE,
     ytId: DataTypes.STRING,
     icon: DataTypes.STRING

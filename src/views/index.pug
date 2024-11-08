@@ -43,8 +43,8 @@ block content
           .message-detail-info.float-end
             div(title=msg.ytId)
               = helpers.formatDate(msg.createdAt)
-            a(href=helpers.youtubeLink(msg.chatId), data-bs-toggle='tooltip', data-bs-placement='left', title=chats.find(c => c.chatId == msg.chatId).title)
-              = msg.chatId
+            a(href=helpers.youtubeLink(msg.chatId), data-bs-toggle='tooltip', data-bs-placement='left', title=chats.title)
+              = msg.chat.chatId
           .mb-2
             .d-inline
               img.user-icon.user-icon-before-text.me-3(src=msg.icon, alt=msg.author)

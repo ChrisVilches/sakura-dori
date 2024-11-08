@@ -15,7 +15,6 @@ class IndexMessagesService {
 
     for (let i = 0; i < messages.length; i++) {
       const msg = messages[i]
-      msg.chatId = chatId
       const chat = await (new ChatsService()).findOne(chatId)
       msg.channelId = chat.id
 
@@ -65,14 +64,13 @@ class IndexMessagesService {
           author: message.author,
           text: message.text,
           deleted: message.deleted,
-          chatId: message.chatId,
           channelId: message.channelId
         }, { transaction: t })
 
         // Increase one to message count. This can be done better with a trigger.
 
         const chat = await Chat.findOne({
-          where: { chatId: message.chatId }
+          where: { id: message.channelId }
         }, { transaction: t })
 
         await chat.increment('messageCount', { transaction: t })
