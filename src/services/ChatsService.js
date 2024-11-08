@@ -6,9 +6,7 @@ class ChatsService {
   }
 
   async findOne (chatId) {
-    return await Chat.findOne({
-      where: { chatId }
-    })
+    return await Chat.findOne({ where: { chatId } })
   }
 
   async fetchLastMessageDateForChat (chatId) {
