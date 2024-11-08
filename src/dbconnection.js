@@ -22,6 +22,10 @@ const models = {
 // It seems it's not so easy to import one model from another model because they are wrapped.
 models.Message.belongsTo(models.Chat, {
   foreignKey: {
+    // TODO: It's actually a channel. This name should be changed. But note that if I change it to
+    // "chatId", the meaning of messages.chatId would be different than that of chats.chatId, so
+    // be careful.
+    // For now, "channel" resembles the meaning of a Discord channel.
     name: 'channelId'
   }
 })
